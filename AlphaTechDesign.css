@@ -2,30 +2,166 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
+/* Main Layout */
+html, body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* For large screens (desktops) */
+@media (min-width: 1025px) {
+    .horizontal-list {
+        font-size: 1.2em;
+    }
+    .content-wrapper {
+        width: 100%;
+        margin: auto; /* Remove centering */
+    }
+}
+
+/* For tablets */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .horizontal-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        font-size: 1em;
+    }
+
+    .video-container {
+        height: 50vh;
+    }
+
+    .centered-text {
+        font-size: 100px;
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 600px) {
+    /* Header styles */
+    .logo {
+        max-width: 100%;
+        width: 190px; /* default width */
+    }
+    
+
+    .title {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .horizontal-list {
+        font-size: 0.9em;
+        gap: 10px;
+    }
+
+    /* Video container styles */
+    .video-container {
+        height: 40vh;
+    }
+
+    .centered-text {
+        font-size: 50px;
+    }
+
+    .centered-subtext {
+        font-size: 20px;
+        top: 80%;
+    }
+
+    /* Service container adjustments */
+    .image-container {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    /* Footer and map adjustments */
+    .map-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .map-image {
+        margin: 0 auto;
+    }
+    
+    /* Address and contact details adjustments */
+    .address, .phonenum, .email, .open {
+        text-align: center;
+    }
+    
+    /* Footer styles */
+    .footer {
+        font-size: 12px;
+        padding: 15px 0;
+    }
+}
+
+/* Stack items vertically and center-align on smaller screens */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: center; /* Center items */
+        text-align: center; /* Center-align text */
+    }
+    
+    /* Adjust the width to ensure items span full width on small screens */
+    .contact-info div {
+        width: 100%;
+    }
+}
+
+/* Styling for icons */
+.call, .wasap {
+    width: 20px; /* Adjust size as needed */
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
 
 /* Header styles */
 h1 {
     font-size: large;
     font-weight: 100;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
 }
 
-.title {
+.title p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: bold ;
+    font-size: 30px;
+    font-weight: bold;
+    font-weight: 200% ;
     color: darkred;
     text-align: center;
-    margin-left: 10%;
 }
 
 /* Centered subtext styles */
 .centered-subtext {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 40px;
+    text-align: center;
+    justify-items: center;
     color: darkred;
     font-size: 50px;
     font-weight: 200%;
@@ -155,23 +291,25 @@ video::-moz-media-controls {
     gap: 20px;
 }
 
-.side-by-side div, .service div {
+.side-by-side div {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
     font-family: Arial, Helvetica, sans-serif;
     color: rgba(61, 61, 61, 0.904);
     background-color: #ffffff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 200px;
+    width: 220px;
 }
 
 /* Product photo styles */
 .product-photo {
-    width: 200px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    width: 200px; /* Define a specific width */
+    height: auto; /* Let the height adjust automatically */
+    display: block; /* Make sure it's block to allow centering */
     transition: transform 0.3s ease;
 }
 
@@ -232,6 +370,15 @@ video::-moz-media-controls {
     cursor: pointer;
 }
 
+.horizontal-list li:hover {
+    color: darkred;
+    text-decoration: underline;
+}
+
+.contact, .about {
+    color: rgba(61, 61, 61, 0.904);
+}
+
 .contact:hover {
     color: darkred; /* Set to dark red on hover */
     text-decoration: underline; /* Add underline on hover */
@@ -274,23 +421,35 @@ html, body {
 /* The wrapper takes up all space except for the footer */
 .content-wrapper {
     flex: 1;
+    width: 100%;
 }
 
 hr{
     margin: 40px;
 }
 
-.call {
-    width: 40px;
-    vertical-align: middle ;
-    margin-right: 5px ;
+/* Container for contact information */
+.contact-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 20px;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3d3d3d;
 }
 
-.wasap {
-    margin-top: 5px;
-    width: 40px;
-    vertical-align: middle ;
-    margin-right: 5px ;
+/* Individual section styling */
+.contact-info div {
+    width: 100%;
+}
+
+/* Styling for icons */
+.call, .wasap {
+    width: 20px; /* Adjust size as needed */
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
 .map-container {

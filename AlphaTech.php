@@ -11,8 +11,10 @@
     </section>
 
     <section class="header">
-        <img src="AlphaTechLogo.png" class="logo" alt="AlphaTech Logo">
-
+        <a href="#top"> <!-- Adjust this URL if you want to link to a specific page -->
+            <img src="AlphaTechLogo.png" class="logo" alt="AlphaTech Logo">
+        </a>
+        
         <div class="title">
             <p>ALPHA TECH COMPUTER SDN BHD</p>
         </div>
@@ -37,7 +39,7 @@
         <section class="video-container">
             <h1 class="centered-text">Welcome</h1>
             <video autoplay loop muted>
-                <source src="WebsiteAds1.mp4" type="video/mp4">
+                <source src="welcomevideo.mp4" type="video/mp4">
             </video>
             <h2 class="centered-subtext">What are you looking for?</h2>
         </section>
@@ -96,42 +98,37 @@
              <img src="Map.png" alt="Map" class="map-image">
         </a>
 
-        <div class="address">
-            <p>ADDRESS:<br>
-               <br>
-               No.35, Tingkat Bawah,<br>
-               Pusat Niaga Paya Keladi,<br>
-               20100 Kuala Terengganu,<br>
-               Terengganu, Malaysia.</p>
-        </div>
-
-        <div class="phonenum">
-            <p>PHONE NUMBER:<br><br>
-                <img src="call.png" alt="Phone Icon" class="call">
-                : 609-6243455 <br>
-
-                <img src="call.png" alt="Phone Icon" class="call">
-                : 609-6242455 <br>
-            
-                <img src="whatsapp.png" alt="Phone Icon" class="wasap">
-                : +6011-29265988 <br>
-            </p>
-        </div>
-
-
-        <div class="email">
-            <p>EMAIL:<br>
-            <br>
-            sales@alpha-tech.com.my</p>
-        </div>
-
-        <div class="open">
-            <p>OPERATING HOUR:<br>
-            <br>
-            Saturday ~ Thursday : 9.15am - 5.45pm <br>
-            Friday : Close <br>
-            </p>
-        </div>
+        <div class="contact-info">
+            <div class="address">
+                <p><strong>ADDRESS:</strong><br>
+                    No.35, Tingkat Bawah,<br>
+                    Pusat Niaga Paya Keladi,<br>
+                    20100 Kuala Terengganu,<br>
+                    Terengganu, Malaysia.
+                </p>
+            </div>
+        
+            <div class="phonenum">
+                <p><strong>PHONE NUMBER:</strong><br>
+                    <img src="call.png" alt="Phone Icon" class="call">: 609-6243455 <br>
+                    <img src="call.png" alt="Phone Icon" class="call">: 609-6242455 <br>
+                    <img src="whatsapp.png" alt="WhatsApp Icon" class="wasap">: +6011-29265988
+                </p>
+            </div>
+        
+            <div class="email">
+                <p><strong>EMAIL:</strong><br>
+                    sales@alpha-tech.com.my
+                </p>
+            </div>
+        
+            <div class="open">
+                <p><strong>OPERATING HOURS:</strong><br>
+                    Saturday ~ Thursday: 9.15am - 5.45pm <br>
+                    Friday: Closed
+                </p>
+            </div>
+        </div>        
 
     </section>
 
@@ -142,12 +139,14 @@
     </footer>
 
     <script>
-        function scrollToBottom() {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth'
-        });
+    function scrollToBottom() {
+        if (document.body.scrollHeight > window.innerHeight) {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
         }
+    }
     </script>
 
 
