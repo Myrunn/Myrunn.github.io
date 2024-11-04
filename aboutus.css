@@ -135,6 +135,12 @@ html, body {
         align-items: center; /* Center items */
         text-align: center; /* Center-align text */
     }
+
+    .content {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: center; /* Center items */
+        text-align: center; /* Center-align text */
+    }
     
     /* Adjust the width to ensure items span full width on small screens */
     .contact-info div {
@@ -171,169 +177,6 @@ h1 {
     text-align: center;
 }
 
-/* Centered subtext styles */
-.centered-subtext {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    text-align: center;
-    justify-items: center;
-    color: darkred;
-    font-size: 50px;
-    font-weight: 600;
-    z-index: 1;
-    font-family: Arial, Helvetica, sans-serif;
-    top: 85%;
-}
-
-.service-subtext {
-    margin-top: 40px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-style: bold;
-    color: darkred;
-    font-size: 50px;
-    font-weight: 600;
-    z-index: 1;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-
-/* Style for the container holding all service images */
-.image-container {
-    display: flex;
-    gap: 20px;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 20%;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    padding: 20px; /* Space between the images and the border */
-    border: 1px solid black; /* Large grey border */
-    border-radius: 20px ; /* Optional: rounded corners */
-}
-
-/* Ensure all service images are the same size */
-.service {
-    width: 80px;
-    height: 80px;
-    object-fit: cover; /* Ensures image does not stretch */
-    margin-bottom: 10px;
-}
-
-.troli {
-    width: 90px;
-    height: 90px;
-    object-fit: cover; /* Ensures image does not stretch */
-    margin-bottom: 10px;
-}
-
-
-/* Style for each individual service item */
-.service-item {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-/* Photos styles */
-.photos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Video container styles */
-.video-container {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background-color: #f5f5f5;
-}
-
-video {
-    width: 100%;
-    height:400px;
-    object-fit: cover;
-    pointer-events: none; /* Prevents user interaction */
-}
-
-video::-internal-media-controls,
-video::-webkit-media-controls,
-video::-moz-media-controls {
-    display: none;
-}
-
-/* Centered text styles */
-.centered-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(255, 255, 255);
-    font-size: 200px;
-    z-index: 1;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 2px 2px 5px rgba(0, 0, 0, 0.5);
-    font-family: fantasy;
-}
-
-/* Product styles */
-.product {
-    background-color: #f5f5f5;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.product-table {
-    margin: 0 auto;
-    width: auto;
-}
-
-.product-table td {
-    padding: 20px;
-    text-align: center;
-    vertical-align: top;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 50px;
-}
-
-/* Side-by-side styles */
-.side-by-side {
-    display: flex;
-    flex-wrap: wrap; /* Allows wrapping to new rows */
-    justify-content: center;
-    gap: 20px;
-}
-
-.side-by-side div {
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgba(61, 61, 61, 0.932);
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 220px;
-}
-
-/* Product photo styles */
-.product-photo {
-    width: 200px; /* Define a specific width */
-    height: auto; /* Let the height adjust automatically */
-    display: block; /* Make sure it's block to allow centering */
-    transition: transform 0.3s ease;
-}
-
-.product-photo:hover {
-    transform: scale(1.2);
-}
 
 /* Top bar styles */
 #top {
@@ -419,6 +262,92 @@ video::-moz-media-controls {
     color: darkred; /* Optional: change color on hover */
 }
 
+/*------------------------------------------Body--------------------------------------------------*/
+
+ 
+.body { 
+    background-color: rgb(196, 196, 196); 
+    padding-bottom: 40px; 
+    padding-top: 20px; 
+    justify-items: center;
+} 
+ 
+.content { 
+    display: flex; 
+    justify-content: center;
+    padding-left: 120px;
+    padding-right: 120px;
+} 
+ 
+.content h2 { 
+    font-size: 50px; 
+    font-weight: 600; 
+    font-family: Arial, Helvetica, sans-serif; 
+    color: darkred; 
+    margin-left: 30px;
+    margin-bottom: 20px;
+} 
+ 
+.text {
+    margin-left: 20px;
+}
+
+.text1 { 
+    margin-left: 30px;
+    margin-right: 20px;
+    font-size: 20px; 
+    font-weight: 400; 
+    text-align: justify !important;
+} 
+
+.text2 { 
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 25px; 
+    font-weight: 600; 
+} 
+
+.image-slider {
+    position: relative; /* Important for button positioning */
+    width: 100%;
+    max-width: 400px; /* Maximum width for the slider */
+    margin: auto; /* Center the slider */
+}
+
+.image {
+    margin-top: 20px;
+    display: none; /* Hide all images by default */
+    width: 400px; /* Make images responsive */
+    margin-right: 20px;
+}
+
+
+.image.active {
+    display: block; /* Show the currently active image */
+}
+
+button {
+    position: absolute; /* Position buttons over the images */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for exact centering */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1; /* Ensure buttons appear above images */
+}
+
+.prev {
+    left: 20px; /* Position the 'previous' button to the left */
+}
+
+.next {
+    right: 20px; /* Position the 'next' button to the right */
+}
+
+/*------------------------------------------Body--------------------------------------------------*/
+
 
 /* Ensure the body and content wrapper take up the full height of the viewport */
 html, body {
@@ -432,10 +361,6 @@ html, body {
 .content-wrapper {
     flex: 1;
     width: 100%;
-}
-
-hr{
-    margin: 40px;
 }
 
 /* Container for contact information */
@@ -487,27 +412,11 @@ hr{
 .map-image:hover {
     transform: scale(1.2); /* Enlarge on hover */
 }
-  
-/* Back to top button styles */
-#backToTop {
-    display: none;
-    outline: none;
-    border: none;
-    background-color: #e8e7e7;
-    color: rgba(61, 61, 61, 0.904);
-    cursor: pointer;
-    padding: 15px;
-    font-size: 18px;
-}
-
-#backToTop:hover {
-    background-color: #d5d5d5;
-}
 
 /* Footer styles */
 .footer {
     background-color: darkred;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 10px 0;
     font-size: 14px;
