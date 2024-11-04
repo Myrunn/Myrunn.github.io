@@ -76,9 +76,24 @@ html, body {
         gap: 10px;
     }
 
-    /* Video container styles */
-    .video-container {
-        height: 40vh;
+    .content {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .image-slider {
+        width: 100%; /* Make the image slider take full width */
+        max-width: none; /* Remove the maximum width constraint */
+    }
+    
+    .image {
+        width: 100%; /* Make images responsive to full width on mobile */
+    }
+
+    .text {
+        margin: 0; /* Remove left margin */
+        text-align: center; /* Center the text for mobile readability */
     }
 
     .centered-text {
@@ -137,9 +152,24 @@ html, body {
     }
 
     .content {
-        flex-direction: column; /* Stack items vertically on small screens */
-        align-items: center; /* Center items */
-        text-align: center; /* Center-align text */
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .image-slider {
+        width: 100%; /* Make the image slider take full width */
+        max-width: none; /* Remove the maximum width constraint */
+    }
+    
+    .image {
+        width: 100%; /* Make images responsive to full width on mobile */
+    }
+
+    .text {
+        margin: 0; /* Remove left margin */
+        text-align: center; /* Center the text for mobile readability */
     }
     
     /* Adjust the width to ensure items span full width on small screens */
