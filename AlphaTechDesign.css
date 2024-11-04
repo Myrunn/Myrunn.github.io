@@ -29,8 +29,12 @@ html, body {
     }
 }
 
-/* For mobile phones */
-@media (max-width: 600px) {
+/* Stack items vertically and center-align on smaller screens */
+@media (max-width: 768px) {
+    .centered-subtext {
+        font-size: 80px; /* Reduce font size for tablets */
+    }
+
     /* Header styles */
     .logo {
         max-width: 100%;
@@ -103,13 +107,6 @@ html, body {
         font-size: 12px;
         padding: 15px 0;
     }
-}
-
-/* Stack items vertically and center-align on smaller screens */
-@media (max-width: 768px) {
-    .centered-subtext {
-        font-size: 80px; /* Reduce font size for tablets */
-    }
 
     .contact-info {
         flex-direction: column; /* Stack items vertically on small screens */
@@ -121,14 +118,16 @@ html, body {
     .contact-info div {
         width: 100%;
     }
+
+    /* Styling for icons */
+    .call, .wasap {
+        width: 20px; /* Adjust size as needed */
+        vertical-align: middle;
+        margin-right: 5px;
+    }
 }
 
-/* Styling for icons */
-.call, .wasap {
-    width: 20px; /* Adjust size as needed */
-    vertical-align: middle;
-    margin-right: 5px;
-}
+
 
 
 /*------------------------------------------------------------------- Header styles -----------------------------------------------------------------*/

@@ -29,15 +29,19 @@ html, body {
     }
 }
 
+/* Stack items vertically and center-align on smaller screens */
+@media (max-width: 768px) {
 
-/* For mobile phones */
-@media (max-width: 600px) {
     /* Header styles */
     .logo {
         max-width: 100%;
         width: 190px; /* default width */
     }
     
+    .body {
+        width: 100%;
+    }
+
     .header {
         flex-direction: column;
         align-items: center; /* Center-aligns content */
@@ -64,7 +68,7 @@ html, body {
         flex-direction: column;
         align-items: center;
         text-align: center; /* Center-align text content */
-        padding: 0 10px;
+        padding: 0;
     }
     
     .image-slider {
@@ -92,12 +96,6 @@ html, body {
         font-size: 16px; /* Adjust paragraph text size for readability */
     }
 
-    /* Service container adjustments */
-    .image-container {
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
     /* Footer and map adjustments */
     .map-container {
         flex-direction: column;
@@ -120,12 +118,9 @@ html, body {
         font-size: 12px;
         padding: 15px 0;
     }
-}
 
-/* Stack items vertically and center-align on smaller screens */
-@media (max-width: 768px) {
     .centered-subtext {
-        font-size: 1.5em; /* Reduce font size for tablets */
+        font-size: 1.5em; /* Reduce font size for display */
     }
 
     .contact-info {
@@ -139,62 +134,22 @@ html, body {
         align-items: center;
         padding: 0 20px;
         text-align: center;
-    }.content {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items */
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    
-    .image-slider {
-        width: 100%; /* Make the image slider take full width */
-        max-width: 100%; /* Ensure it doesn’t exceed the screen width */
-        margin-bottom: 20px; /* Add spacing between the image and text */
-    }
-
-    .image {
-        width: 100%; /* Make the images responsive */
-    }
-
-    .text {
-        width: 100%; /* Allow text to take full width */
-        text-align: center; /* Center-align text on mobile */
-    }
-
-    .text h2 {
-        font-size: 24px; /* Adjust font size for smaller screens */
-    }
-
-    .text1, .text2 {
-        font-size: 16px; /* Adjust paragraph text size for readability */
-    }
-
-    .image-slider {
-        width: 100%; /* Make the image slider take full width */
-        max-width: none; /* Remove the maximum width constraint */
-    }
-    
-    .image {
-        width: 100%; /* Make images responsive to full width on mobile */
-    }
-
-    .text {
-        margin: 0; /* Remove left margin */
-        text-align: center; /* Center the text for mobile readability */
     }
     
     /* Adjust the width to ensure items span full width on small screens */
     .contact-info div {
         width: 100%;
     }
+
+    /* Styling for icons */
+    .call, .wasap {
+        width: 20px; /* Adjust size as needed */
+        vertical-align: middle;
+        margin-right: 5px;
+}
 }
 
-/* Styling for icons */
-.call, .wasap {
-    width: 20px; /* Adjust size as needed */
-    vertical-align: middle;
-    margin-right: 5px;
-}
+
 
 
 /*------------------------------------------------------------------- Header styles -----------------------------------------------------------------*/
