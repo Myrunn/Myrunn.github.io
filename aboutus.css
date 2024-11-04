@@ -415,11 +415,28 @@ html, body {
 
 /* Footer styles */
 .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: darkred;
-    color: rgb(255, 255, 255);
-    text-align: center;
+    color: aliceblue;
     padding: 10px 0;
     font-size: 14px;
+    position: relative;
+}
+
+.footer p {
+    position: absolute;
+    right: 60px;
+    font-size: 10px;
+}
+
+.azlogo {
+
+    width: 30px;
+    height: auto;
+    position: absolute;
+    right:25px; /* Adjust this value to move the logo slightly to the right */
 }
 
 /* Centered heading styles */
