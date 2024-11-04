@@ -29,35 +29,6 @@ html, body {
     }
 }
 
-/* For tablets */
-@media (max-width: 1024px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .title {
-        font-size: 20px;
-        margin: 0;
-    }
-
-    .horizontal-list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        font-size: 1em;
-    }
-
-    .video-container {
-        height: 50vh;
-    }
-
-    .centered-text {
-        font-size: 100px;
-    }
-}
-
 /* For mobile phones */
 @media (max-width: 600px) {
     /* Header styles */
@@ -66,15 +37,25 @@ html, body {
         width: 190px; /* default width */
     }
     
-    .title p {
-        font-size: 18px;
+    .header {
+        flex-direction: column;
+        align-items: center; /* Center-aligns content */
         text-align: center;
     }
-
+    
     .horizontal-list {
-        font-size: 0.9em;
+        display: flex;
+        flex-direction: row; /* Stack items vertically */
+        align-items: center;
+        width: 100%; /* Takes full width of the container */
+        margin-top: 10px; /* Adds spacing between title and menu */
         gap: 10px;
+        font-size: 1em; /* Adjusts font size for better readability */
     }
+    
+    .title p {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }    
 
     /* Video container styles */
     .video-container {
@@ -127,7 +108,7 @@ html, body {
 /* Stack items vertically and center-align on smaller screens */
 @media (max-width: 768px) {
     .centered-subtext {
-        font-size: 1.5em; /* Reduce font size for tablets */
+        font-size: 80px; /* Reduce font size for tablets */
     }
 
     .contact-info {
@@ -328,7 +309,7 @@ video::-moz-media-controls {
     width: 200px; /* Define a specific width */
     height: auto; /* Let the height adjust automatically */
     display: block; /* Make sure it's block to allow centering */
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in-out;
 }
 
 .product-photo:hover {
@@ -474,7 +455,7 @@ hr{
 }
 
 .map-image {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in-out;
     margin-left: 40px;
     margin-bottom: 20px;
     width: 100%; /* Initial width */
@@ -514,6 +495,7 @@ hr{
     padding: 10px 0;
     font-size: 14px;
     position: relative;
+    margin-top: auto;
 }
 
 .footer p {

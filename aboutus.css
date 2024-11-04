@@ -29,34 +29,6 @@ html, body {
     }
 }
 
-/* For tablets */
-@media (max-width: 1024px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .title {
-        font-size: 20px;
-        margin: 0;
-    }
-
-    .horizontal-list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        font-size: 1em;
-    }
-
-    .video-container {
-        height: 50vh;
-    }
-
-    .centered-text {
-        font-size: 100px;
-    }
-}
 
 /* For mobile phones */
 @media (max-width: 600px) {
@@ -66,47 +38,58 @@ html, body {
         width: 190px; /* default width */
     }
     
-    .title p {
-        font-size: 18px;
+    .header {
+        flex-direction: column;
+        align-items: center; /* Center-aligns content */
         text-align: center;
     }
-
+    
     .horizontal-list {
-        font-size: 0.9em;
-        gap: 10px;
-    }
-
-    .content {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Center-align the menu */
         align-items: center;
-        padding: 0 20px;
-    }
-
-    .image-slider {
-        width: 100%; /* Make the image slider take full width */
-        max-width: none; /* Remove the maximum width constraint */
+        width: 100%;
+        margin-top: 10px;
+        gap: 10px;
+        font-size: 1em;
     }
     
+    .title p {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }    
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; /* Center-align text content */
+        padding: 0 10px;
+    }
+    
+    .image-slider {
+        width: 100%; /* Make the image slider take full width */
+        max-width: 100%; /* Ensure it doesn’t exceed the screen width */
+        margin-bottom: 20px; /* Add spacing between the image and text */
+    }
+
     .image {
-        width: 100%; /* Make images responsive to full width on mobile */
+        width: 100%; /* Make the images responsive */
     }
 
     .text {
-        margin: 0; /* Remove left margin */
-        text-align: center; /* Center the text for mobile readability */
+        width: 100%;
+        text-align: center;
+        margin: auto; /* Center the text block */
     }
 
-    .centered-text {
-        font-size: 50px;
+    .text h2 {
+        font-size: 24px; /* Adjust font size for smaller screens */
+        margin: 20px;
     }
 
-    .centered-subtext {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-
-    .product-table {
-        padding: 10px;
+    .text1, .text2 {
+        font-size: 16px; /* Adjust paragraph text size for readability */
     }
 
     /* Service container adjustments */
@@ -156,6 +139,34 @@ html, body {
         align-items: center;
         padding: 0 20px;
         text-align: center;
+    }.content {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .image-slider {
+        width: 100%; /* Make the image slider take full width */
+        max-width: 100%; /* Ensure it doesn’t exceed the screen width */
+        margin-bottom: 20px; /* Add spacing between the image and text */
+    }
+
+    .image {
+        width: 100%; /* Make the images responsive */
+    }
+
+    .text {
+        width: 100%; /* Allow text to take full width */
+        text-align: center; /* Center-align text on mobile */
+    }
+
+    .text h2 {
+        font-size: 24px; /* Adjust font size for smaller screens */
+    }
+
+    .text1, .text2 {
+        font-size: 16px; /* Adjust paragraph text size for readability */
     }
 
     .image-slider {
