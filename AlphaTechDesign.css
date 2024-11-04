@@ -344,7 +344,7 @@ video::-moz-media-controls {
 }
 
 #top p {
-    color: aliceblue;
+    color: rgb(255, 255, 255);
     padding-left: 2.5%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
