@@ -29,103 +29,93 @@ html, body {
     }
 }
 
-/* Stack items vertically and center-align on smaller screens */
+
 @media (max-width: 768px) {
     .centered-subtext {
-        font-size: 80px; /* Reduce font size for tablets */
-    }
-
-    /* Header styles */
-    .logo {
-        max-width: 100%;
-        width: 190px; /* default width */
-    }
-    
-    .header {
-        flex-direction: column;
-        align-items: center; /* Center-aligns content */
-        text-align: center;
-    }
-    
-    .horizontal-list {
-        display: flex;
-        flex-direction: row; /* Stack items vertically */
-        align-items: center;
-        width: 100%; /* Takes full width of the container */
-        margin-top: 10px; /* Adds spacing between title and menu */
-        gap: 10px;
-        font-size: 1em; /* Adjusts font size for better readability */
-    }
-    
-    .title p {
-        font-size: 20px; /* Adjust font size for smaller screens */
-    }    
-
-    /* Video container styles */
-    .video-container {
-        height: 40vh;
-    }
-
-    .centered-text {
-        font-size: 50px;
-    }
-
-    .centered-subtext {
-        font-size: 1.2em;
+        font-size: 1.5em; /* More responsive for mobile */
         margin-bottom: 10px;
     }
 
-    .product-table {
-        padding: 10px;
+    body {
+        width: 100%;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
     }
 
-    /* Service container adjustments */
+    .logo, .video-container, .image-container, .product-table, .map-image, .contact-info div {
+        width: 100%; /* Ensure full width on mobile */
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .horizontal-list {
+        display: flex;
+        flex-direction: row; /* Stack items */
+        align-items: center;
+        margin-top: 10px;
+        font-size: 1vw;
+    }
+
+    .title p {
+        font-size: 1em; /* Responsive font size */
+    }
+
+    .video-container {
+        height: 30vh; /* Adjust as needed for better fit */
+    }
+
+    .centered-text {
+        font-size: 2em;
+    }
+
     .image-container {
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 2%;
+        margin-right: 2%;
     }
 
-    /* Footer and map adjustments */
-    .map-container {
+    .map-container  {
         flex-direction: column;
         align-items: center;
         text-align: center;
         padding: 20px;
     }
 
-    .map-image {
-        margin: 0 auto;
-    }
-    
-    /* Address and contact details adjustments */
-    .address, .phonenum, .email, .open {
+    .image-container {
+        width: auto;
+        align-items: center;
         text-align: center;
+        padding: 20px;
     }
-    
-    /* Footer styles */
+
+    .service-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px
+    }
+
+
+    /* Adjust the width to ensure items span full width on small screens */
+    .contact-info div {
+        width: 80%;
+        font-size: smaller;
+    }
+
     .footer {
         font-size: 12px;
         padding: 15px 0;
     }
 
-    .contact-info {
-        flex-direction: column; /* Stack items vertically on small screens */
-        align-items: center; /* Center items */
-        text-align: center; /* Center-align text */
-    }
-    
-    /* Adjust the width to ensure items span full width on small screens */
-    .contact-info div {
-        width: 100%;
-    }
-
-    /* Styling for icons */
     .call, .wasap {
-        width: 20px; /* Adjust size as needed */
+        width: 20px;
         vertical-align: middle;
         margin-right: 5px;
     }
 }
+
 
 
 
