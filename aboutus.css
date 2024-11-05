@@ -16,126 +16,6 @@ html, body {
     overflow-x: hidden;
 }
 
-/* Stack items vertically and center-align on smaller screens */
-@media (max-width: 768px) {
-
-    /* Header styles */
-    .logo {
-        max-width: 100%;
-        width: 190px; /* default width */
-    }
-    
-    .body {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: center; /* Center-aligns content */
-        text-align: center;
-    }
-    
-    .horizontal-list {
-        display: flex;
-        flex-direction: row;
-        justify-content: center; /* Center-align the menu */
-        align-items: center;
-        width: 100%;
-        margin-top: 10px;
-        gap: 10px;
-        font-size: 1em;
-    }
-    
-    .title p {
-        font-size: 20px; /* Adjust font size for smaller screens */
-    }    
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center; /* Center-align text content */
-        padding: 0;
-        margin: 0;
-    }
-    
-    .image-slider {
-        width: 90%; /* Make the image slider take full width */
-        max-width: 100%; /* Ensure it doesn’t exceed the screen width */
-        margin-bottom: 20px; /* Add spacing between the image and text */
-    }
-
-    .image {
-        width: 80%; /* Make the images responsive */
-    }
-
-    .text {
-        width: 100%;
-        padding: 0 5%;
-        text-align: center;
-        margin-left: 0;
-    }
-
-    .text h2 {
-        margin-top: 20px;
-        font-size: 24px; /* Adjust font size for smaller screens */
-    }
-
-    .text1, .text2 {
-        font-size: 4.5vw; /* Adjust paragraph text size for readability */
-    }
-
-    /* Footer and map adjustments */
-    .map-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .map-image {
-        margin: 0 auto;
-    }
-    
-    /* Address and contact details adjustments */
-    .address, .phonenum, .email, .open {
-        text-align: center;
-    }
-    
-    /* Footer styles */
-    .footer {
-        font-size: 12px;
-        padding: 15px 0;
-    }
-
-    .centered-subtext {
-        font-size: 1.5vw; /* Reduce font size for display */
-    }
-
-    .contact-info {
-        flex-direction: column; /* Stack items vertically on small screens */
-        align-items: center; /* Center items */
-        text-align: center; /* Center-align text */
-    }
-    
-    /* Adjust the width to ensure items span full width on small screens */
-    .contact-info div {
-        width: 80%;
-        font-size: smaller;
-    }
-
-    /* Styling for icons */
-    .call, .wasap {
-        width: 20px; /* Adjust size as needed */
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-}
-
-
-
-
 /*------------------------------------------------------------------- Header styles -----------------------------------------------------------------*/
 h1 {
     font-size: large;
@@ -388,32 +268,45 @@ html, body {
     transform: scale(1.2); /* Enlarge on hover */
 }
 
-/* Footer styles */
 .footer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: darkred;
     color: aliceblue;
-    padding: 10px 0;
-    font-size: 14px;
+    padding: 5px 0;
+    padding-left: 20px;
+    padding-right: 20px;
     position: relative;
     margin-top: auto;
 }
 
+.copy {
+    margin: 0; /* Remove default margin for precise alignment */
+    font-size: 14px;
+}
+
 .footer p {
-    position: absolute;
-    right: 60px;
+    margin: 0; /* Remove any extra margin */
+    position: relative;
+    right: 0;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
     font-size: 10px;
 }
 
-.azlogo {
-
-    width: 30px;
-    height: auto;
-    position: absolute;
-    right:25px; /* Adjust this value to move the logo slightly to the right */
+.footer-right p {
+    margin: 0 10px 0 0; /* Space between "Developed By" and the logo */
+    position: relative;
 }
+
+.azlogo {
+    width: 25px;
+    height: auto;
+}    
 
 /* Centered heading styles */
 h3 {
@@ -422,4 +315,165 @@ h3 {
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 40px;
 }
+
+
+@media (max-width: 768px) {
+
+    #top {
+        height: 35px;
+        background-color: darkred;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #top p {
+        color: aliceblue;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    /* Header styles */
+    .logo {
+        max-width: 100%;
+        width: 150px; /* default width */
+    }
+    
+    .body {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center; /* Center-aligns content */
+        text-align: center;
+    }
+    
+    .horizontal-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Center-align the menu */
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+        gap: 15px;
+        font-size: 1em;
+    }
+    
+    .title p {
+        font-size: 1.3em; /* Adjust font size for smaller screens */
+    }    
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; /* Center-align text content */
+        padding: 0;
+        margin: 0;
+    }
+    
+    .image-slider {
+        width: 90%; /* Make the image slider take full width */
+        max-width: 100%; /* Ensure it doesn’t exceed the screen width */
+        margin-bottom: 20px; /* Add spacing between the image and text */
+    }
+
+    .text {
+        width: 85%;
+        padding: 0 5%;
+        text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .text h2 {
+        margin-top: 20px;
+        font-size: 24px; /* Adjust font size for smaller screens */
+    }
+
+    .text1, .text2 {
+        font-size: 4.5vw; /* Adjust paragraph text size for readability */
+    }
+
+    /* Footer and map adjustments */
+    .map-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .map-image {
+        margin: 0 auto;
+    }
+    
+    /* Address and contact details adjustments */
+    .address, .phonenum, .email, .open {
+        text-align: center;
+    }
+    
+    .footer {
+        display: flex;
+        justify-content: space-between; /* Space items to opposite sides */
+        align-items: center; /* Center items vertically */
+        background-color: darkred;
+        color: aliceblue;
+        font-size: 2vw;
+        position: relative;
+        margin-top: auto;
+    }
+    
+    .copy {
+        margin: 0; /* Remove default margin for precise alignment */
+    }
+    
+    .footer p {
+        font-size: 2vw;
+        margin: 0; /* Remove any extra margin */
+        position: relative;
+        right: 0;
+    }
+    
+    .footer-right {
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-right p {
+        margin: 0 10px 0 0; /* Space between "Developed By" and the logo */
+        position: relative;
+    }
+    
+    .azlogo {
+        width: 20px;
+        height: auto;
+    }    
+
+    .centered-subtext {
+        font-size: 1.5vw; /* Reduce font size for display */
+    }
+
+    .contact-info {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: center; /* Center items */
+        gap: 30px;
+        width: 80%;
+    }
+    
+    /* Adjust the width to ensure items span full width on small screens */
+    .contact-info div {
+        width: 100%;
+        font-size: smaller;
+    }
+
+    /* Styling for icons */
+    .call, .wasap {
+        width: 20px; /* Adjust size as needed */
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+}
+
+
 
