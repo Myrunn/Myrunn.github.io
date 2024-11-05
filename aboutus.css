@@ -2,6 +2,7 @@
 * {
     margin: 0;
     padding: 0;
+    background-origin: padding-box;
 }
 
 /* Main Layout */
@@ -12,21 +13,7 @@ html, body {
     margin: 0;
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-/* For large screens (desktops) */
-@media (min-width: 1025px) {
-    .horizontal-list {
-        font-size: 1.2em;
-    }
-    .content-wrapper {
-        width: 100%;
-        margin: auto; /* Remove centering */
-    }
-
-    .title p {
-        margin-left: 150px;
-    }
+    overflow-x: hidden;
 }
 
 /* Stack items vertically and center-align on smaller screens */
@@ -40,6 +27,7 @@ html, body {
     
     .body {
         width: 100%;
+        max-width: 100%;
     }
 
     .header {
@@ -69,31 +57,33 @@ html, body {
         align-items: center;
         text-align: center; /* Center-align text content */
         padding: 0;
+        margin: 0;
     }
     
     .image-slider {
-        width: 100%; /* Make the image slider take full width */
+        width: 90%; /* Make the image slider take full width */
         max-width: 100%; /* Ensure it doesn’t exceed the screen width */
         margin-bottom: 20px; /* Add spacing between the image and text */
     }
 
     .image {
-        width: 100%; /* Make the images responsive */
+        width: 80%; /* Make the images responsive */
     }
 
     .text {
         width: 100%;
+        padding: 0 5%;
         text-align: center;
-        margin: auto; /* Center the text block */
+        margin-left: 0;
     }
 
     .text h2 {
+        margin-top: 20px;
         font-size: 24px; /* Adjust font size for smaller screens */
-        margin: 20px;
     }
 
     .text1, .text2 {
-        font-size: 16px; /* Adjust paragraph text size for readability */
+        font-size: 4.5vw; /* Adjust paragraph text size for readability */
     }
 
     /* Footer and map adjustments */
@@ -120,7 +110,7 @@ html, body {
     }
 
     .centered-subtext {
-        font-size: 1.5em; /* Reduce font size for display */
+        font-size: 1.5vw; /* Reduce font size for display */
     }
 
     .contact-info {
@@ -128,17 +118,11 @@ html, body {
         align-items: center; /* Center items */
         text-align: center; /* Center-align text */
     }
-
-    .content {
-        flex-direction: column;
-        align-items: center;
-        padding: 0 20px;
-        text-align: center;
-    }
     
     /* Adjust the width to ensure items span full width on small screens */
     .contact-info div {
-        width: 100%;
+        width: 80%;
+        font-size: smaller;
     }
 
     /* Styling for icons */
@@ -146,7 +130,7 @@ html, body {
         width: 20px; /* Adjust size as needed */
         vertical-align: middle;
         margin-right: 5px;
-}
+    }
 }
 
 
@@ -261,7 +245,7 @@ h1 {
 /*------------------------------------------Body--------------------------------------------------*/
 
  
-.body { 
+.mid { 
     background-color: #e4e4e4; 
     padding-bottom: 40px; 
     padding-top: 20px; 
@@ -271,8 +255,8 @@ h1 {
 .content { 
     display: flex; 
     justify-content: center;
-    padding-left: 120px;
-    padding-right: 120px;
+    padding-left: 5em;
+    padding-right: 5em;
 } 
  
 .content h2 { 
@@ -280,25 +264,21 @@ h1 {
     font-weight: 600; 
     font-family: Arial, Helvetica, sans-serif; 
     color: darkred; 
-    margin-left: 30px;
     margin-bottom: 20px;
 } 
- 
+
 .text {
-    margin-left: 20px;
+    margin: 0 4%
 }
 
 .text1 { 
-    margin-left: 30px;
-    margin-right: 20px;
-    font-size: 20px; 
+    font-size: large;
     font-weight: 400; 
     text-align: justify !important;
 } 
 
 .text2 { 
     margin-top: 20px;
-    margin-left: 30px;
     font-size: 25px; 
     font-weight: 600; 
 } 
@@ -306,14 +286,14 @@ h1 {
 .image-slider {
     position: relative; /* Important for button positioning */
     width: 100%;
-    max-width: 400px; /* Maximum width for the slider */
+    max-width: 100%; /* Maximum width for the slider */
     margin: auto; /* Center the slider */
 }
 
 .image {
     margin-top: 20px;
     display: none; /* Hide all images by default */
-    width: 400px; /* Make images responsive */
+    width: 100%; /* Make images responsive */
     margin-right: 20px;
 }
 
@@ -396,7 +376,6 @@ html, body {
 
 .map-image {
     transition: transform 0.3s ease;
-    margin-left: 40px;
     margin-bottom: 20px;
     width: 100%; /* Initial width */
     max-width: 300px; /* Adjust max size as needed */
@@ -419,6 +398,7 @@ html, body {
     padding: 10px 0;
     font-size: 14px;
     position: relative;
+    margin-top: auto;
 }
 
 .footer p {

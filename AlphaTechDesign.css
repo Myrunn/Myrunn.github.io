@@ -14,21 +14,6 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* For large screens (desktops) */
-@media (min-width: 1025px) {
-    .horizontal-list {
-        font-size: 1.2em;
-    }
-    .content-wrapper {
-        width: 100%;
-        margin: auto; /* Remove centering */
-    }
-
-    .title p {
-        margin-left: 150px;
-    }
-}
-
 
 @media (max-width: 768px) {
     .centered-subtext {
@@ -37,7 +22,6 @@ html, body {
     }
 
     body {
-        width: 100%;
         overflow-x: hidden; /* Prevent horizontal scrolling */
     }
 
@@ -63,12 +47,11 @@ html, body {
         font-size: 1em; /* Responsive font size */
     }
 
-    .video-container {
-        height: 30vh; /* Adjust as needed for better fit */
-    }
-
     .centered-text {
-        font-size: 2em;
+        font-size: 4vw;
+        position: absolute;
+        color: rgb(255, 255, 255);
+        font-family: fantasy;
     }
 
     .image-container {
@@ -96,7 +79,6 @@ html, body {
         text-align: center;
         padding: 20px
     }
-
 
     /* Adjust the width to ensure items span full width on small screens */
     .contact-info div {
@@ -243,7 +225,7 @@ video::-moz-media-controls {
     left: 50%;
     transform: translate(-50%, -50%);
     color: rgb(255, 255, 255);
-    font-size: 200px;
+    font-size: 10vw;
     z-index: 1;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 2px 2px 5px rgba(0, 0, 0, 0.5);
     font-family: fantasy;
