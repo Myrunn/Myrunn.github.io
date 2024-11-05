@@ -14,94 +14,6 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-@media (max-width: 768px) {
-    .centered-subtext {
-        font-size: 1.5em; /* More responsive for mobile */
-        margin-bottom: 10px;
-    }
-
-    body {
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-    }
-
-    .logo, .video-container, .image-container, .product-table, .map-image, .contact-info div {
-        width: 100%; /* Ensure full width on mobile */
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .horizontal-list {
-        display: flex;
-        flex-direction: row; /* Stack items */
-        align-items: center;
-        margin-top: 10px;
-        font-size: 1vw;
-    }
-
-    .title p {
-        font-size: 1em; /* Responsive font size */
-    }
-
-    .centered-text {
-        font-size: 4vw;
-        position: absolute;
-        color: rgb(255, 255, 255);
-        font-family: fantasy;
-    }
-
-    .image-container {
-        margin-left: 2%;
-        margin-right: 2%;
-    }
-
-    .map-container  {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .image-container {
-        width: auto;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .service-item {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px
-    }
-
-    /* Adjust the width to ensure items span full width on small screens */
-    .contact-info div {
-        width: 80%;
-        font-size: smaller;
-    }
-
-    .footer {
-        font-size: 12px;
-        padding: 15px 0;
-    }
-
-    .call, .wasap {
-        width: 20px;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-}
-
-
-
-
-
 /*------------------------------------------------------------------- Header styles -----------------------------------------------------------------*/
 h1 {
     font-size: large;
@@ -427,7 +339,6 @@ hr{
 
 .map-image {
     transition: transform 0.3s ease-in-out;
-    margin-left: 40px;
     margin-bottom: 20px;
     width: 100%; /* Initial width */
     max-width: 300px; /* Adjust max size as needed */
@@ -492,3 +403,134 @@ h3 {
     margin-top: 40px;
 }
 
+@media (max-width: 768px) {
+    .centered-subtext {
+        font-size: 2em; /* More responsive for mobile */
+        margin-bottom: 10px;
+    }
+
+    body {
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    .logo, .video-container, .image-container, .product-table, .map-image, .contact-info div {
+        width: 100%; /* Ensure full width on mobile */
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .horizontal-list {
+        display: flex;
+        flex-direction: row; /* Stack items */
+        align-items: center;
+        margin-top: 10px;
+        font-size: 5vw;
+    }
+
+    .title p {
+        font-size: 1.5em; /* Responsive font size */
+    }
+
+    .centered-text {
+        font-size: 70px;
+        position: absolute;
+        color: rgb(255, 255, 255);
+        font-family: fantasy;
+    }
+
+     /* Footer and map adjustments */
+     .map-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .image-container {
+        width: auto;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .service-subtext{
+        font-size: 2em;
+    }
+
+    .service-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        gap: 40px;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #3d3d3d;
+    }
+
+    /* Adjust the width to ensure items span full width on small screens */
+    .contact-info div {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .call .wasap {
+        text-align: left;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between; /* Space items to opposite sides */
+        align-items: center; /* Center items vertically */
+        background-color: darkred;
+        color: aliceblue;
+        padding: 10px 20px; /* Add horizontal padding for spacing */
+        font-size: 2vw;
+        position: relative;
+        margin-top: auto;
+    }
+    
+    .copy {
+        margin: 0; /* Remove default margin for precise alignment */
+    }
+    
+    .footer p {
+        font-size: 2vw;
+        margin: 0; /* Remove any extra margin */
+        position: relative;
+        right: 0;
+    }
+    
+    .footer-right {
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-right p {
+        margin: 0 30px 0 0; /* Space between "Developed By" and the logo */
+        position: relative;
+    }
+    
+    .azlogo {
+        width: 20px;
+        height: auto;
+        position: absolute;
+    }    
+
+    .call, .wasap {
+        width: 20px;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+}
