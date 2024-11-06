@@ -226,7 +226,6 @@ html, body {
     justify-content: space-between;
     text-align: left;
     gap: 40px;
-    padding: 20px;
     font-family: Arial, Helvetica, sans-serif;
     color: #3d3d3d;
 }
@@ -459,6 +458,7 @@ h3 {
         align-items: center; /* Center items */
         gap: 30px;
         width: 80%;
+        padding: 20px;
     }
     
     /* Adjust the width to ensure items span full width on small screens */
