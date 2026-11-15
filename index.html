@@ -15,8 +15,8 @@
             --accent: #00f0ff;
             --accent-glow: rgba(0, 240, 255, 0.4);
             --border: #1e3a5f;
-            /* Vanta handles the main background color now */
             --nav-bg: rgba(5, 11, 20, 0.85); 
+            --matte-overlay: rgba(5, 11, 20, 0.80); /* Dims the background animation */
         }
 
         :root[data-theme="light"] {
@@ -28,12 +28,12 @@
             --accent-glow: rgba(2, 132, 199, 0.3);
             --border: #cbd5e1;
             --nav-bg: rgba(248, 250, 252, 0.85);
+            --matte-overlay: rgba(248, 250, 252, 0.80); /* Dims the background animation */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            /* Background is transparent to let Vanta.js show through */
             background: transparent; 
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
@@ -49,7 +49,20 @@
             left: 0; 
             width: 100%; 
             height: 100%;
+            z-index: -2;
+        }
+
+        /* Matte Overlay to soften the background */
+        .matte-overlay {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: var(--matte-overlay);
             z-index: -1;
+            pointer-events: none;
+            transition: background 0.3s;
         }
 
         /* Navigation */
@@ -241,8 +254,9 @@
 </head>
 <body>
 
-    <!-- Vanta.js Background Target -->
+    <!-- Vanta.js Background Targets -->
     <div id="vanta-bg"></div>
+    <div class="matte-overlay"></div>
 
     <nav>
         <div class="nav-links">
@@ -332,7 +346,6 @@
                         <div class="flip-hint">Click box to view project image</div>
                     </div>
                     <div class="card-back">
-                        <!-- Replace src with your actual image path when ready -->
                         <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Grafana+Dashboard" alt="MQTT-BIDS">
                         <div class="card-caption">Grafana Observability Dashboard</div>
                     </div>
@@ -582,13 +595,13 @@
             // Update Vanta.js colors based on the new theme
             if (newTheme === 'light') {
                 vantaEffect.setOptions({
-                    color: 0x0284c7, // Darker blue for light mode network lines
-                    backgroundColor: 0xf8fafc // Light background
+                    color: 0x0284c7, 
+                    backgroundColor: 0xf8fafc 
                 });
             } else {
                 vantaEffect.setOptions({
-                    color: 0x00f0ff, // Cyan for dark mode network lines
-                    backgroundColor: 0x050b14 // Dark background
+                    color: 0x00f0ff, 
+                    backgroundColor: 0x050b14 
                 });
             }
         });
