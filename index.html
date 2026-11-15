@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amirul Husaini | Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        header {
+            padding: 100px 20px 50px;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 0 0 10px;
+            color: var(--text-primary);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        .contact-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin: 0 10px;
+            border: 1px solid var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .contact-links a:hover {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        section {
+            margin-bottom: 60px;
+        }
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .project-card {
+            background-color: var(--surface-color);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .project-tech {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .skill-category {
+            background-color: var(--surface-color);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .skill-category h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Amirul Husaini Bin Abdul Manaf</h1>
+        <div class="subtitle">B.Sc. Computer Networks | Cybersecurity Enthusiast</div>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 30px;">
+            Final-year student at UiTM Jasin skilled in network security, virtualization, and wireless network simulation. Seeking an internship placement (March - June 2027) to apply technical skills in a professional environment.
+        </p>
+        <div class="contact-links">
+            <a href="https://github.com/Myrunn" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/amirulhusaini" target="_blank">LinkedIn</a>
+            <a href="mailto:amirulhusaini.am@gmail.com">Email Me</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Technical Projects</h2>
+            
+            <div class="project-card">
+                <div class="project-title">MQTT-BIDS: Agentless Intrusion Detection System</div>
+                <div class="project-tech">Snort 3 | GNS3 | Python | SQLite | Grafana</div>
+                <p>Developing a broker-level IDS for MQTT networks using Snort 3 signature rules within a GNS3 environment. Configured real-time observability to monitor broker flooding DoS attacks, malformed packets, and unauthorized topic access.</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Multi-Area OSPF & Network Automation</div>
+                <div class="project-tech">GNS3 | Python | Netmiko | SSH</div>
+                <p>Designed an enterprise topology with multiple routers, a backbone switch, and VLANs. Automated Multi-Area OSPFv2, VLAN, and DHCP configuration using Python scripts.</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">IoT Smart Home Automation System</div>
+                <div class="project-tech">Arduino | ESP8266 | Blynk | Sensors</div>
+                <p>Designed an IoT-based smart home prototype integrating multiple sensors to monitor environmental conditions, triggering automated responses displayed on a real-time dashboard.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Networking</h3>
+                    <p>TCP/IP, LAN/WAN, OSPF, BGP, EIGRP, VLANs, DHCP, MQTT, Cisco Configuration</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Simulation & Tools</h3>
+                    <p>GNS3, NS-3, Packet Tracer, Wireshark, Docker, VMware, Kali Linux</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Security & Forensics</h3>
+                    <p>Snort 3 IDS, Scapy, ACLs, VPN, FTK Imager, Autopsy, OSINT</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <p>Python, C++, HTML, PHP, MySQL, SQLite, Network Automation</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Experience & Education</h2>
+            <div class="project-card">
+                <div class="project-title">B.Sc. (Hons.) Computer Networks</div>
+                <div class="project-tech">Universiti Teknologi MARA (UiTM) Jasin | Present</div>
+                <p>Current CGPA: 3.88. Active in Networking Society Club and technical support for community programs.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-title">IT Support Technician (Internship)</div>
+                <div class="project-tech">Alpha Tech Computer Sdn. Bhd. | 2024 - 2025</div>
+                <p>Installed device wiring for hotels, troubleshot Ethernet switch cabling, and developed a static company website.</p>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
