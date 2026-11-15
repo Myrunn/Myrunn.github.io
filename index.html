@@ -8,7 +8,6 @@
     <style>
         /* CSS Variables for Light/Dark Mode */
         :root[data-theme="dark"] {
-            --bg: #050b14;
             --surface: #0f172a;
             --surface-hover: #1e293b;
             --text-main: #f8fafc;
@@ -16,11 +15,11 @@
             --accent: #00f0ff;
             --accent-glow: rgba(0, 240, 255, 0.4);
             --border: #1e3a5f;
-            --canvas-opacity: 0.5;
+            /* Vanta handles the main background color now */
+            --nav-bg: rgba(5, 11, 20, 0.85); 
         }
 
         :root[data-theme="light"] {
-            --bg: #f8fafc;
             --surface: #ffffff;
             --surface-hover: #f1f5f9;
             --text-main: #0f172a;
@@ -28,34 +27,36 @@
             --accent: #0284c7;
             --accent-glow: rgba(2, 132, 199, 0.3);
             --border: #cbd5e1;
-            --canvas-opacity: 0.15;
+            --nav-bg: rgba(248, 250, 252, 0.85);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background-color: var(--bg);
+            /* Background is transparent to let Vanta.js show through */
+            background: transparent; 
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
+            transition: color 0.3s;
             overflow-x: hidden;
         }
 
-        /* Interactive Mesh Background */
-        #mesh-canvas {
+        /* Vanta.js Background Container */
+        #vanta-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             z-index: -1;
-            opacity: var(--canvas-opacity);
-            transition: opacity 0.3s;
         }
 
         /* Navigation */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background: var(--bg);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             z-index: 100;
@@ -65,6 +66,7 @@
             padding: 15px 40px;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
+            transition: background 0.3s;
         }
 
         .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
@@ -89,26 +91,44 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 60px 0;
-            border-bottom: 1px dashed var(--border);
-            margin-bottom: 40px;
+            padding: 40px 0 60px;
         }
 
         .profile-img {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             border: 4px solid var(--accent);
-            box-shadow: 0 0 25px var(--accent-glow);
+            box-shadow: 0 0 30px var(--accent-glow);
             object-fit: cover;
             margin-bottom: 25px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .hero h1 { font-size: 3rem; margin-bottom: 10px; }
         .hero h2 { font-size: 1.2rem; color: var(--accent); font-weight: 500; margin-bottom: 20px; }
         .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto 20px; font-size: 1.1rem; }
-        .hero .contact-info { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-muted); }
+        .hero .contact-info { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 30px; }
         .hero a { color: var(--accent); text-decoration: none; margin: 0 10px; }
+
+        /* Internship Banner */
+        .internship-banner {
+            background: var(--surface);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 50px;
+            text-align: center;
+            animation: pulse-border 2.5s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+            70% { box-shadow: 0 0 15px 10px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+        .internship-banner h3 { color: var(--accent); margin-bottom: 10px; font-family: 'Fira Code', monospace; font-size: 1.3rem; }
+        .internship-banner p { margin: 5px 0; color: var(--text-main); font-size: 1.1rem; }
+        .internship-banner strong { color: var(--accent); }
 
         /* Resume Sections */
         .section { margin-bottom: 50px; }
@@ -123,24 +143,88 @@
         .section-title::before { content: '>'; color: var(--accent); margin-right: 15px; font-weight: bold; }
         .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); margin-left: 20px; }
 
-        /* Cards */
-        .card {
+        /* Flip Cards */
+        .card-container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-container.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front {
+            position: relative; 
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 25px;
-            margin-bottom: 20px;
-            transition: transform 0.2s, border-color 0.2s;
-            position: relative;
+            backface-visibility: hidden;
+            transition: border-color 0.2s, transform 0.2s;
         }
-        .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .card-container:hover .card-front {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
         
+        .card-back {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+        .card-container:hover .card-back img {
+            opacity: 1;
+        }
+        .card-caption {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px;
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--accent);
+        }
+
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
         .card-title { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
         .card-subtitle { color: var(--accent); font-family: 'Fira Code', monospace; font-size: 0.9rem; }
         .card-date { color: var(--text-muted); font-size: 0.9rem; white-space: nowrap; }
-        .card ul { margin-left: 20px; color: var(--text-muted); margin-bottom: 15px; }
-        .card li { margin-bottom: 8px; }
+        .card-front ul { margin-left: 20px; color: var(--text-muted); margin-bottom: 15px; }
+        .card-front li { margin-bottom: 8px; }
+
+        .flip-hint {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            opacity: 0.8;
+        }
+        .flip-hint::before { content: '↻'; margin-right: 6px; font-size: 1.1rem; }
 
         /* Skills Grid */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
@@ -148,88 +232,26 @@
         .skill-box strong { display: block; color: var(--accent); margin-bottom: 5px; font-family: 'Fira Code', monospace; }
         .skill-box span { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* Interactive Image Buttons */
-        .btn-media {
-            display: inline-flex;
-            align-items: center;
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Fira Code', monospace;
-            margin-top: 10px;
-        }
-        .btn-media:hover { background: var(--accent); color: var(--bg); }
-        .btn-media::before { content: '📷'; margin-right: 8px; filter: grayscale(100%); }
-
-        /* Image Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal.active { display: flex; }
-        .modal-content {
-            background: var(--surface);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--accent);
-            max-width: 800px;
-            width: 100%;
-            position: relative;
-            text-align: center;
-        }
-        .modal-close {
-            position: absolute;
-            top: 10px; right: 15px;
-            background: none; border: none;
-            color: var(--text-main);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .modal-img {
-            max-width: 100%;
-            max-height: 70vh;
-            border-radius: 4px;
-            margin-top: 15px;
-            background: var(--border); /* visible before image loads */
-        }
-        .modal-caption {
-            margin-top: 15px;
-            color: var(--text-muted);
-            font-family: 'Fira Code', monospace;
-        }
-
         @media (max-width: 768px) {
             nav { flex-direction: column; gap: 15px; text-align: center; }
             .nav-links { justify-content: center; }
-            .hero { padding: 40px 0; }
+            .hero { padding: 60px 0 40px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Interactive Mesh Background -->
-    <canvas id="mesh-canvas"></canvas>
+    <!-- Vanta.js Background Target -->
+    <div id="vanta-bg"></div>
 
     <nav>
         <div class="nav-links">
             <a href="#summary">Summary</a>
+            <a href="#availability">Availability</a>
             <a href="#skills">Skills</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
-            <a href="#leadership">Leadership</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
         </div>
         <button class="theme-toggle" id="themeBtn">Toggle Theme</button>
     </nav>
@@ -238,18 +260,24 @@
         
         <!-- Hero / Executive Summary -->
         <div class="hero" id="summary">
-            <!-- Ensure mio.jpg is uploaded in your repository -->
             <img src="mio.jpg" alt="Amirul Husaini" class="profile-img">
             <h1>Amirul Husaini Bin Abdul Manaf</h1>
             <h2>B.Sc. (Hons.) Computer Networks</h2>
-            <p>Final-year Computer Networks student at UiTM Jasin with hands-on experience in network security, virtualization and wireless network simulation. Skilled in developing intrusion detection systems and configuring enterprise network topologies using Snort 3, GNS3, and Python. Seeking an internship placement in computer networking or cybersecurity from 15 March to 18 June 2027 to apply technical skills in a professional environment.</p>
+            <p>Final-year Computer Networks student at UiTM Jasin with hands-on experience in network security, virtualization and wireless network simulation. Skilled in developing intrusion detection systems and configuring enterprise network topologies using Snort 3, GNS3, and Python.</p>
             
             <div class="contact-info">
                 Kuala Nerus, Terengganu | 013-788 2685 | <a href="mailto:amirulhusaini.am@gmail.com">amirulhusaini.am@gmail.com</a><br>
                 <a href="https://github.com/Myrunn" target="_blank">github.com/Myrunn</a> | <a href="https://www.linkedin.com/in/amirulhusaini" target="_blank">linkedin.com/in/amirulhusaini</a>
             </div>
-            <br>
-            <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=My+Desk+Setup', 'My Study & Development Setup')">View Desk Setup Image</button>
+        </div>
+
+        <!-- Internship Availability Banner -->
+        <div class="section" id="availability">
+            <div class="internship-banner">
+                <h3>[ STATUS: SEEKING INTERNSHIP ]</h3>
+                <p><strong>15 March 2027 – 18 June 2027</strong></p>
+                <p>Actively searching for a 14-week industrial training placement in <strong>Computer Networking</strong> or <strong>Cybersecurity</strong> to apply technical skills in a professional environment.</p>
+            </div>
         </div>
 
         <!-- Technical Skills -->
@@ -281,41 +309,79 @@
                     <span>FTK Imager, HxD, Autopsy, OSINT, MySQL, SQLite, Blynk</span>
                 </div>
             </div>
-            <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Software+Stack+Logos', 'My Technical Stack')">View Skills Chart</button>
         </div>
 
-        <!-- Education Background -->
-        <div class="section" id="education">
-            <h2 class="section-title">Education Background</h2>
+        <!-- Technical Projects -->
+        <div class="section" id="projects">
+            <h2 class="section-title">Technical Projects</h2>
             
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Bachelor of Computer Science (Hons.) Computer Networks</div>
-                        <div class="card-subtitle">Universiti Teknologi MARA, Kampus Jasin, Melaka</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">MQTT-BIDS: Broker-Level Intrusion Detection System</div>
+                                <div class="card-subtitle">Final Year Project</div>
+                            </div>
+                            <div class="card-date">Expected Jan 2027</div>
+                        </div>
+                        <ul>
+                            <li>Developing a broker-level IDS for MQTT networks using Snort 3 signature rules within a GNS3 environment.</li>
+                            <li>Configured real-time observability using SQLite and Grafana dashboards to monitor broker flooding DoS attacks, malformed packets and unauthorized topic access.</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view project image</div>
                     </div>
-                    <div class="card-date">March 2025 – Present | CGPA: 3.88</div>
+                    <div class="card-back">
+                        <!-- Replace src with your actual image path when ready -->
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Grafana+Dashboard" alt="MQTT-BIDS">
+                        <div class="card-caption">Grafana Observability Dashboard</div>
+                    </div>
                 </div>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=UiTM+Jasin+Campus', 'UiTM Jasin Campus')">View Campus Image</button>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Diploma in Computer Science</div>
-                        <div class="card-subtitle">Universiti Teknologi MARA, Kampus Kuala Terengganu</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Network Automation of Multi-Area OSPF, VLAN & DHCP</div>
+                                <div class="card-subtitle">WAN Technologies Project</div>
+                            </div>
+                            <div class="card-date">2026</div>
+                        </div>
+                        <ul>
+                            <li>Designed a GNS3 enterprise topology with three routers, a backbone switch and three VLANs.</li>
+                            <li>Automated Multi-Area OSPFv2, VLAN and DHCP configuration using Python and Netmiko over SSH.</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view topology image</div>
                     </div>
-                    <div class="card-date">Oct. 2022 – Feb. 2025 | CGPA: 3.52</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=GNS3+Topology" alt="GNS3 Topology">
+                        <div class="card-caption">GNS3 Multi-Area Enterprise Topology</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Sijil Pelajaran Malaysia (SPM) – Pure Science</div>
-                        <div class="card-subtitle">Maktab Rendah Sains MARA, Pengkalan Chepa, Kelantan</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">IoT Smart Home Automation System</div>
+                                <div class="card-subtitle">IoT Project</div>
+                            </div>
+                            <div class="card-date">2026</div>
+                        </div>
+                        <ul>
+                            <li>Designed an IoT-based smart home prototype utilizing an Arduino board and ESP8266 controller.</li>
+                            <li>Integrated multiple sensors to monitor environmental conditions and trigger automated responses displayed on a real-time Blynk dashboard.</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view hardware image</div>
                     </div>
-                    <div class="card-date">2017 – 2021 | Result: 5A</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Arduino+Hardware" alt="Arduino IoT">
+                        <div class="card-caption">Arduino & ESP8266 Hardware Setup</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -324,83 +390,112 @@
         <div class="section" id="experience">
             <h2 class="section-title">Working Experience</h2>
             
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">IT Support Technician (Internship)</div>
-                        <div class="card-subtitle">Alpha Tech Computer Sdn. Bhd.</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">IT Support Technician (Internship)</div>
+                                <div class="card-subtitle">Alpha Tech Computer Sdn. Bhd.</div>
+                            </div>
+                            <div class="card-date">Sep. 2024 – Feb. 2025</div>
+                        </div>
+                        <ul>
+                            <li>Installed and set up device wiring for hotel buildings in Kuala Terengganu.</li>
+                            <li>Troubleshot Ethernet switch cabling issues at a client office.</li>
+                            <li>Developed a static website for the company.</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view work image</div>
                     </div>
-                    <div class="card-date">Sep. 2024 – Feb. 2025</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=On-site+Wiring" alt="Alpha Tech Work">
+                        <div class="card-caption">On-site server wiring and network setup</div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Installed and set up device wiring for hotel buildings in Kuala Terengganu.</li>
-                    <li>Troubleshot Ethernet switch cabling issues at a client office.</li>
-                    <li>Developed a static website for the company.</li>
-                </ul>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Alpha+Tech+Work', 'On-site server wiring and setup')">View Work Image</button>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Production Runner (Part-time)</div>
-                        <div class="card-subtitle">NR Café Pata</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Production Runner (Part-time)</div>
+                                <div class="card-subtitle">NR Café Pata</div>
+                            </div>
+                            <div class="card-date">Aug. 2026 - Sep. 2026</div>
+                        </div>
+                        <ul>
+                            <li>Ensured timely service and maintained high customer satisfaction in a fast-paced environment.</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view image</div>
                     </div>
-                    <div class="card-date">Aug. 2026 - Sep. 2026</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=NR+Cafe" alt="NR Cafe">
+                        <div class="card-caption">Fast-paced service environment</div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Ensured timely service and maintained high customer satisfaction in a fast-paced environment.</li>
-                </ul>
             </div>
         </div>
 
-        <!-- Technical Projects -->
-        <div class="section" id="projects">
-            <h2 class="section-title">Technical Projects</h2>
+        <!-- Education Background -->
+        <div class="section" id="education">
+            <h2 class="section-title">Education Background</h2>
             
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">MQTT-BIDS: An Agentless Broker-Level Intrusion Detection System</div>
-                        <div class="card-subtitle">Final Year Project</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Bachelor of Computer Science (Hons.) Computer Networks</div>
+                                <div class="card-subtitle">Universiti Teknologi MARA, Kampus Jasin, Melaka</div>
+                            </div>
+                            <div class="card-date">March 2025 – Present | CGPA: 3.88</div>
+                        </div>
+                        <div class="flip-hint">Click box to view campus image</div>
                     </div>
-                    <div class="card-date">Expected Jan 2027</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=UiTM+Jasin" alt="UiTM Jasin">
+                        <div class="card-caption">UiTM Kampus Jasin, Melaka</div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Developing a broker-level IDS for MQTT networks using Snort 3 signature rules within a GNS3 environment.</li>
-                    <li>Configured real-time observability using SQLite and Grafana dashboards to monitor broker flooding DoS attacks, malformed packets and unauthorized topic access.</li>
-                </ul>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Grafana+Dashboard', 'MQTT-BIDS Grafana Alert Dashboard')">View Project Image</button>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Network Automation of a Multi-Area OSPF, VLAN and DHCP Network</div>
-                        <div class="card-subtitle">WAN Technologies Project</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Diploma in Computer Science</div>
+                                <div class="card-subtitle">Universiti Teknologi MARA, Kampus Kuala Terengganu</div>
+                            </div>
+                            <div class="card-date">Oct. 2022 – Feb. 2025 | CGPA: 3.52</div>
+                        </div>
+                        <div class="flip-hint">Click box to view campus image</div>
                     </div>
-                    <div class="card-date">2026</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=UiTM+Kuala+Terengganu" alt="UiTM Terengganu">
+                        <div class="card-caption">UiTM Kampus Kuala Terengganu</div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Designed a GNS3 enterprise topology with three routers, a backbone switch and three VLANs.</li>
-                    <li>Automated Multi-Area OSPFv2, VLAN and DHCP configuration using Python and Netmiko over SSH.</li>
-                </ul>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=GNS3+Topology', 'GNS3 Multi-Area Topology')">View Topology Image</button>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">IoT Smart Home Automation System</div>
-                        <div class="card-subtitle">IoT Project</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Sijil Pelajaran Malaysia (SPM) – Pure Science</div>
+                                <div class="card-subtitle">Maktab Rendah Sains MARA, Pengkalan Chepa, Kelantan</div>
+                            </div>
+                            <div class="card-date">2017 – 2021 | Result: 5A</div>
+                        </div>
+                        <div class="flip-hint">Click box to view school image</div>
                     </div>
-                    <div class="card-date">2026</div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=MRSM+Pengkalan+Chepa" alt="MRSM">
+                        <div class="card-caption">MRSM Pengkalan Chepa</div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Designed an IoT-based smart home prototype utilizing an Arduino board and ESP8266 controller.</li>
-                    <li>Integrated multiple sensors to monitor environmental conditions and trigger automated responses displayed on a real-time Blynk dashboard.</li>
-                </ul>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=IoT+Hardware+Setup', 'Arduino & ESP8266 Hardware Setup')">View Hardware Image</button>
             </div>
         </div>
 
@@ -408,46 +503,74 @@
         <div class="section" id="leadership">
             <h2 class="section-title">Leadership & Certifications</h2>
             
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Leadership Experience</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div class="card-title">Leadership Experience</div>
+                        </div>
+                        <ul>
+                            <li><strong>Technical Support Committee</strong> | SULAM Programme, UiTM Kampus Jasin (Oct 2026 – Present) - Support technical works for "Project Netizen Hero!".</li>
+                            <li><strong>Admin Assistant & Technical Support</strong> | ICTFF8 Capture The Flag (Jan 2026).</li>
+                            <li><strong>Vice Treasurer</strong> | Networking Society Club (Aug 2025 – Jan 2026).</li>
+                            <li><strong>Secretary</strong> | Res-Q Association Club (Jan 2023 – Jun 2023) - Led voluntary assistance for students and local community.</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view event image</div>
+                    </div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=SULAM+Event" alt="Leadership">
+                        <div class="card-caption">SULAM Event Technical Support</div>
+                    </div>
                 </div>
-                <ul>
-                    <li><strong>Technical Support Committee</strong> | SULAM Programme, UiTM Kampus Jasin (Oct 2026 – Present) - Support technical works for "Project Netizen Hero!".</li>
-                    <li><strong>Admin Assistant & Technical Support</strong> | ICTFF8 Capture The Flag (Jan 2026).</li>
-                    <li><strong>Vice Treasurer</strong> | Networking Society Club (Aug 2025 – Jan 2026).</li>
-                    <li><strong>Secretary</strong> | Res-Q Association Club (Jan 2023 – Jun 2023) - Led voluntary assistance for students and local community.</li>
-                </ul>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Event+Photo', 'SULAM Event Technical Support')">View Event Image</button>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Certification & Training</div>
+            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-header">
+                            <div class="card-title">Certification & Training</div>
+                        </div>
+                        <ul>
+                            <li>Google Cybersecurity Professional Certificate – Coursera (Expected Dec. 2026)</li>
+                            <li>Google Certified Educator Level 1 (Oct. 2026)</li>
+                            <li>Cisco Networking Academy CCNA Courses</li>
+                            <li>Food Handler Training Course – Richkey Academy (Jul. 2026)</li>
+                        </ul>
+                        <div class="flip-hint">Click box to view certificates</div>
+                    </div>
+                    <div class="card-back">
+                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Certificates" alt="Certifications">
+                        <div class="card-caption">Google & Cisco Certifications</div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Google Cybersecurity Professional Certificate – Coursera (Expected Dec. 2026)</li>
-                    <li>Google Certified Educator Level 1 (Oct. 2026)</li>
-                    <li>Cisco Networking Academy CCNA Courses: Intro to Networks; Switching, Routing, Wireless; Enterprise Networking, Security, & Automation</li>
-                    <li>Food Handler Training Course – Richkey Academy (Jul. 2026)</li>
-                </ul>
-                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Certificates', 'Google & Cisco Certificates')">View Certificates</button>
             </div>
         </div>
+
     </div>
 
-    <!-- Image Modal Structure -->
-    <div id="image-modal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">✖</button>
-            <h3 id="modal-caption" class="modal-caption">Image Viewer</h3>
-            <!-- To use real images later, just replace the URL strings in the onclick events above with your actual image file names (e.g. 'cert.png') -->
-            <img id="modal-img" class="modal-img" src="" alt="Section Image">
-        </div>
-    </div>
-
+    <!-- Scripts required for Vanta.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    
     <script>
-        // --- Theme Toggle Logic ---
+        // Initialize Vanta.js
+        let vantaEffect = VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x00f0ff,
+            backgroundColor: 0x050b14, 
+            points: 12.00,
+            maxDistance: 20.00,
+            spacing: 18.00
+        });
+
+        // Theme Toggle Logic
         const themeBtn = document.getElementById('themeBtn');
         const rootAttr = document.documentElement;
 
@@ -455,146 +578,20 @@
             const currentTheme = rootAttr.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             rootAttr.setAttribute('data-theme', newTheme);
-            initColors(); // update canvas colors instantly
-        });
-
-        // --- Image Modal Logic ---
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalCaption = document.getElementById('modal-caption');
-
-        // This function is triggered by the buttons in the HTML
-        function openModal(imageSrc, captionText) {
-            modalImg.src = imageSrc;
-            modalCaption.textContent = captionText;
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            setTimeout(() => { modalImg.src = ''; }, 300); // clear after fade
-        }
-
-        // Close when clicking outside the image
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-
-        // --- Mesh Constellation Background Logic ---
-        const canvas = document.getElementById('mesh-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 150 };
-        let lineColor = '';
-        let dotColor = '';
-
-        function initColors() {
-            const style = getComputedStyle(rootAttr);
-            // Grab CSS variables based on current theme
-            lineColor = style.getPropertyValue('--accent').trim() || '#00f0ff';
-            dotColor = style.getPropertyValue('--text-muted').trim() || '#94a3b8';
-        }
-
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-        window.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        class Node {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.vy = (Math.random() - 0.5) * 1.5;
-                this.size = Math.random() * 2 + 1;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                
-                // Bounce off edges smoothly
-                if (this.x < 0 || this.x > width) this.vx = -this.vx;
-                if (this.y < 0 || this.y > height) this.vy = -this.vy;
-            }
-            draw() {
-                ctx.fillStyle = dotColor;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initNodes() {
-            particles = [];
-            let numberOfNodes = (width * height) / 12000; 
-            for (let i = 0; i < numberOfNodes; i++) {
-                particles.push(new Node());
-            }
-        }
-
-        function animateMesh() {
-            ctx.clearRect(0, 0, width, height);
             
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                // Connect particles to each other
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = lineColor;
-                        ctx.globalAlpha = 1 - (distance / 100);
-                        ctx.lineWidth = 0.8;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                        ctx.globalAlpha = 1.0;
-                    }
-                }
-
-                // Connect particles to mouse
-                if (mouse.x != null) {
-                    let dx = particles[i].x - mouse.x;
-                    let dy = particles[i].y - mouse.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = lineColor;
-                        ctx.globalAlpha = 1 - (distance / mouse.radius);
-                        ctx.lineWidth = 1.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.stroke();
-                        ctx.globalAlpha = 1.0;
-                    }
-                }
+            // Update Vanta.js colors based on the new theme
+            if (newTheme === 'light') {
+                vantaEffect.setOptions({
+                    color: 0x0284c7, // Darker blue for light mode network lines
+                    backgroundColor: 0xf8fafc // Light background
+                });
+            } else {
+                vantaEffect.setOptions({
+                    color: 0x00f0ff, // Cyan for dark mode network lines
+                    backgroundColor: 0x050b14 // Dark background
+                });
             }
-            requestAnimationFrame(animateMesh);
-        }
-
-        // Initialize everything
-        initColors();
-        resizeCanvas();
-        initNodes();
-        animateMesh();
-
+        });
     </script>
 </body>
 </html>
