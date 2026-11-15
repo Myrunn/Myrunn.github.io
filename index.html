@@ -1,484 +1,600 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amirul Husaini | Network Command Center</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Amirul Husaini | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #050b14;
-            --panel-bg: #0a1324;
-            --panel-border: #1e3a5f;
-            --text-main: #e2e8f0;
-            --text-muted: #64748b;
-            --cyan: #00f0ff;
-            --green: #00ff66;
-            --alert: #ff0055;
-            --font-ui: 'Inter', sans-serif;
-            --font-code: 'Fira Code', monospace;
+        /* CSS Variables for Light/Dark Mode */
+        :root[data-theme="dark"] {
+            --bg: #050b14;
+            --surface: #0f172a;
+            --surface-hover: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #00f0ff;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --border: #1e3a5f;
+            --canvas-opacity: 0.5;
+        }
+
+        :root[data-theme="light"] {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-hover: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent: #0284c7;
+            --accent-glow: rgba(2, 132, 199, 0.3);
+            --border: #cbd5e1;
+            --canvas-opacity: 0.15;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg);
             color: var(--text-main);
-            font-family: var(--font-ui);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
             overflow-x: hidden;
         }
 
-        /* Canvas Background for Packet Flow */
-        #network-canvas {
+        /* Interactive Mesh Background */
+        #mesh-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.4;
+            opacity: var(--canvas-opacity);
+            transition: opacity 0.3s;
         }
 
-        /* Top Navigation Bar */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(5, 11, 20, 0.85);
+            background: var(--bg);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--panel-border);
+            border-bottom: 1px solid var(--border);
             z-index: 100;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 15px 40px;
-            font-family: var(--font-code);
+            font-family: 'Fira Code', monospace;
             font-size: 14px;
         }
 
-        .nav-logo { color: var(--cyan); font-weight: 600; text-decoration: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 25px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--cyan); }
+        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        .container {
-            max-width: 1100px;
-            margin: 100px auto 0;
-            padding: 0 20px;
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s;
         }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* Hero / Telemetry Section */
+        /* Container & Layout */
+        .container { max-width: 1000px; margin: 100px auto 0; padding: 0 20px; }
+
+        /* Hero Section */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 40px;
-            margin-bottom: 60px;
-            align-items: center;
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px dashed var(--border);
+            margin-bottom: 40px;
         }
-        
-        /* Avatar Styling */
-        .avatar {
-            width: 100px;
-            height: 100px;
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            border: 2px solid var(--cyan);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-            margin-bottom: 20px;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
             object-fit: cover;
+            margin-bottom: 25px;
         }
 
-        h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-        
-        .highlight { color: var(--cyan); }
-        .sub-hero { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; max-width: 550px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .hero h2 { font-size: 1.2rem; color: var(--accent); font-weight: 500; margin-bottom: 20px; }
+        .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto 20px; font-size: 1.1rem; }
+        .hero .contact-info { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-muted); }
+        .hero a { color: var(--accent); text-decoration: none; margin: 0 10px; }
 
-        .btn {
-            display: inline-block;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            padding: 12px 25px;
-            font-family: var(--font-code);
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+        /* Resume Sections */
+        .section { margin-bottom: 50px; }
+        .section-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
         }
-        .btn:hover { background: var(--cyan); color: var(--bg-dark); box-shadow: 0 0 15px rgba(0,240,255,0.4); }
+        .section-title::before { content: '>'; color: var(--accent); margin-right: 15px; font-weight: bold; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); margin-left: 20px; }
 
-        /* Telemetry Box */
-        .telemetry {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 20px;
-            font-family: var(--font-code);
-            font-size: 13px;
-            color: var(--green);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .telemetry::before {
-            content: 'SYS.TELEMETRY';
-            position: absolute;
-            top: -10px; left: 15px;
-            background: var(--bg-dark);
-            padding: 0 10px;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-        .telemetry-line { margin-bottom: 8px; opacity: 0; animation: fadeInRow 0.5s forwards; }
-        @keyframes fadeInRow { to { opacity: 1; } }
-
-        /* Dashboard Metrics */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 60px;
-        }
-        .metric-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            border-top: 3px solid var(--cyan);
-            padding: 20px;
-            border-radius: 6px;
-        }
-        .metric-card.alert-border { border-top-color: var(--alert); }
-        .metric-card.green-border { border-top-color: var(--green); }
-        
-        .metric-title { font-family: var(--font-code); font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; }
-        .metric-value { font-size: 2.2rem; font-weight: 700; color: var(--text-main); }
-        .metric-sub { font-size: 13px; color: var(--cyan); margin-top: 5px; }
-
-        /* Section Headers */
-        .section-header {
-            font-family: var(--font-code);
-            font-size: 1.5rem;
-            color: var(--text-main);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-        }
-        .section-header::before {
-            content: '>>';
-            color: var(--cyan);
-            margin-right: 15px;
-        }
-        .section-header::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--panel-border);
-            margin-left: 20px;
-        }
-
-        /* Projects (JSON Format Cards) */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-        .project-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            border-radius: 6px;
             padding: 25px;
-            transition: all 0.3s;
+            margin-bottom: 20px;
+            transition: transform 0.2s, border-color 0.2s;
             position: relative;
-            overflow: hidden;
         }
-        .project-card:hover {
-            border-color: var(--cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,240,255,0.1);
-        }
-        .project-card h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--cyan); }
-        .project-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+        .card:hover { transform: translateY(-3px); border-color: var(--accent); }
         
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tech-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--panel-border);
-            padding: 4px 10px;
-            font-size: 12px;
-            font-family: var(--font-code);
-            border-radius: 4px;
-            color: var(--text-main);
-        }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
+        .card-title { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+        .card-subtitle { color: var(--accent); font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+        .card-date { color: var(--text-muted); font-size: 0.9rem; white-space: nowrap; }
+        .card ul { margin-left: 20px; color: var(--text-muted); margin-bottom: 15px; }
+        .card li { margin-bottom: 8px; }
 
-        /* Traceroute Journey */
-        .traceroute {
-            margin-bottom: 60px;
-            font-family: var(--font-code);
-            font-size: 0.9rem;
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            padding: 30px;
-            border-radius: 6px;
-        }
-        .hop {
-            display: grid;
-            grid-template-columns: 50px 150px 1fr;
-            padding: 12px 0;
-            border-bottom: 1px dashed var(--panel-border);
+        /* Skills Grid */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .skill-box { background: var(--surface); border: 1px solid var(--border); padding: 15px; border-radius: 6px; }
+        .skill-box strong { display: block; color: var(--accent); margin-bottom: 5px; font-family: 'Fira Code', monospace; }
+        .skill-box span { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* Interactive Image Buttons */
+        .btn-media {
+            display: inline-flex;
             align-items: center;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Fira Code', monospace;
+            margin-top: 10px;
         }
-        .hop:last-child { border-bottom: none; }
-        .hop-num { color: var(--text-muted); }
-        .hop-ip { color: var(--cyan); }
-        .hop-desc { color: var(--text-main); font-family: var(--font-ui); }
-        .hop.destination .hop-ip { color: var(--green); }
+        .btn-media:hover { background: var(--accent); color: var(--bg); }
+        .btn-media::before { content: '📷'; margin-right: 8px; filter: grayscale(100%); }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-            .projects-grid { grid-template-columns: 1fr; }
-            .traceroute .hop { grid-template-columns: 40px 100px 1fr; font-size: 0.8rem; }
-            nav { padding: 15px 20px; }
-            .nav-links { display: none; }
+        /* Image Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            text-align: center;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px; right: 15px;
+            background: none; border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .modal-img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 4px;
+            margin-top: 15px;
+            background: var(--border); /* visible before image loads */
+        }
+        .modal-caption {
+            margin-top: 15px;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { justify-content: center; }
+            .hero { padding: 40px 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Animated Packet Flow Background -->
-    <canvas id="network-canvas"></canvas>
+    <!-- Interactive Mesh Background -->
+    <canvas id="mesh-canvas"></canvas>
 
     <nav>
-        <a href="#" class="nav-logo">AH_PORTFOLIO</a>
         <div class="nav-links">
-            <a href="#dashboard">/dashboard</a>
-            <a href="#modules">/modules</a>
-            <a href="#traceroute">/traceroute</a>
-            <a href="mailto:amirulhusaini.am@gmail.com">/contact</a>
+            <a href="#summary">Summary</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#leadership">Leadership</a>
         </div>
+        <button class="theme-toggle" id="themeBtn">Toggle Theme</button>
     </nav>
 
-    <div class="container" id="dashboard">
+    <div class="container">
         
-        <div class="hero">
-            <div>
-                <img src="mio.jpg" alt="Amirul Husaini" class="avatar">
-                <h1>Amirul Husaini<br><span class="highlight">Network Systems.</span></h1>
-                <p class="sub-hero">Final-year B.Sc. Computer Networks student at UiTM Jasin. Specializing in intrusion detection, wireless telemetry, and enterprise network automation.</p>
-                <a href="#modules" class="btn">Initialize Connection</a>
-            </div>
+        <!-- Hero / Executive Summary -->
+        <div class="hero" id="summary">
+            <!-- Ensure mio.jpg is uploaded in your repository -->
+            <img src="mio.jpg" alt="Amirul Husaini" class="profile-img">
+            <h1>Amirul Husaini Bin Abdul Manaf</h1>
+            <h2>B.Sc. (Hons.) Computer Networks</h2>
+            <p>Final-year Computer Networks student at UiTM Jasin with hands-on experience in network security, virtualization and wireless network simulation. Skilled in developing intrusion detection systems and configuring enterprise network topologies using Snort 3, GNS3, and Python. Seeking an internship placement in computer networking or cybersecurity from 15 March to 18 June 2027 to apply technical skills in a professional environment.</p>
             
-            <div class="telemetry" id="telemetry-box">
-                <!-- JavaScript will inject typing text here -->
+            <div class="contact-info">
+                Kuala Nerus, Terengganu | 013-788 2685 | <a href="mailto:amirulhusaini.am@gmail.com">amirulhusaini.am@gmail.com</a><br>
+                <a href="https://github.com/Myrunn" target="_blank">github.com/Myrunn</a> | <a href="https://www.linkedin.com/in/amirulhusaini" target="_blank">linkedin.com/in/amirulhusaini</a>
             </div>
+            <br>
+            <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=My+Desk+Setup', 'My Study & Development Setup')">View Desk Setup Image</button>
         </div>
 
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-title">Degree CGPA</div>
-                <div class="metric-value">3.88</div>
-                <div class="metric-sub">UiTM Jasin</div>
+        <!-- Technical Skills -->
+        <div class="section" id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <strong>Networking & Protocols</strong>
+                    <span>TCP/IP, LAN/WAN, Routing & Switching, OSPF, BGP, EIGRP, VLANs, DHCP, DNS, MQTT</span>
+                </div>
+                <div class="skill-box">
+                    <strong>Configuration & Auto</strong>
+                    <span>Cisco Device Configuration, Python, SSH, Network Automation</span>
+                </div>
+                <div class="skill-box">
+                    <strong>Tools & Simulation</strong>
+                    <span>Cisco Packet Tracer, GNS3, NS-3, Wireshark, iPerf3, Docker, Kali Linux</span>
+                </div>
+                <div class="skill-box">
+                    <strong>Network Security</strong>
+                    <span>Access Control Lists (ACLs), VPN, Network Segmentation, Snort 3 IDS, Scapy</span>
+                </div>
+                <div class="skill-box">
+                    <strong>OS & Programming</strong>
+                    <span>Linux, Windows Server, Windows 10/11, Python, C++, Java, PHP, HTML, Arduino</span>
+                </div>
+                <div class="skill-box">
+                    <strong>Forensics & DBs</strong>
+                    <span>FTK Imager, HxD, Autopsy, OSINT, MySQL, SQLite, Blynk</span>
+                </div>
             </div>
-            <div class="metric-card alert-border">
-                <div class="metric-title">Active Security Rules</div>
-                <div class="metric-value">1,402</div>
-                <div class="metric-sub">Snort 3 Signatures</div>
-            </div>
-            <div class="metric-card green-border">
-                <div class="metric-title">Internship Status</div>
-                <div class="metric-value">Ready</div>
-                <div class="metric-sub">15 Mar - 18 Jun 2027</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-title">Certifications</div>
-                <div class="metric-value">3</div>
-                <div class="metric-sub">Google & Cisco NetAcad</div>
-            </div>
+            <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Software+Stack+Logos', 'My Technical Stack')">View Skills Chart</button>
         </div>
 
-        <h2 class="section-header" id="modules">Active Modules & Projects</h2>
-        
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>MQTT-BIDS</h3>
-                <p class="project-desc">An Agentless Broker-Level Intrusion Detection System. Designed using Snort 3 within a GNS3 environment to monitor broker flooding DoS attacks, malformed packets, and unauthorized topic access, mapped to a real-time Grafana dashboard via SQLite.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Snort 3</span>
-                    <span class="tech-tag">GNS3</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Grafana</span>
+        <!-- Education Background -->
+        <div class="section" id="education">
+            <h2 class="section-title">Education Background</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Bachelor of Computer Science (Hons.) Computer Networks</div>
+                        <div class="card-subtitle">Universiti Teknologi MARA, Kampus Jasin, Melaka</div>
+                    </div>
+                    <div class="card-date">March 2025 – Present | CGPA: 3.88</div>
+                </div>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=UiTM+Jasin+Campus', 'UiTM Jasin Campus')">View Campus Image</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Diploma in Computer Science</div>
+                        <div class="card-subtitle">Universiti Teknologi MARA, Kampus Kuala Terengganu</div>
+                    </div>
+                    <div class="card-date">Oct. 2022 – Feb. 2025 | CGPA: 3.52</div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <h3>Enterprise Network Automation</h3>
-                <p class="project-desc">Designed a complex GNS3 enterprise topology featuring three routers, a backbone switch, and multiple VLANs. Automated the deployment of Multi-Area OSPFv2, VLANs, and DHCP using Python scripts and Netmiko over SSH.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Netmiko</span>
-                    <span class="tech-tag">OSPFv2</span>
-                    <span class="tech-tag">VLAN</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>Wireless Propagation Field Study</h3>
-                <p class="project-desc">Conducted an extensive warwalking field study across the UiTM Jasin Campus. Analyzed radio frequency propagation, channel congestion, and network security posture using Acrylic Network Analyzer and NetSpot telemetry.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Acrylic Wi-Fi</span>
-                    <span class="tech-tag">NetSpot</span>
-                    <span class="tech-tag">RF Analysis</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>IoT Smart Home System</h3>
-                <p class="project-desc">Engineered an IoT-based smart home prototype utilizing an Arduino board and an ESP8266 controller. Integrated various environmental sensors that trigger automated physical responses, monitored via a Blynk dashboard.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Arduino</span>
-                    <span class="tech-tag">ESP8266</span>
-                    <span class="tech-tag">Blynk</span>
-                    <span class="tech-tag">C++</span>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Sijil Pelajaran Malaysia (SPM) – Pure Science</div>
+                        <div class="card-subtitle">Maktab Rendah Sains MARA, Pengkalan Chepa, Kelantan</div>
+                    </div>
+                    <div class="card-date">2017 – 2021 | Result: 5A</div>
                 </div>
             </div>
         </div>
 
-        <h2 class="section-header" id="traceroute">Traceroute: Journey & Experience</h2>
-        
-        <div class="traceroute">
-            <div class="hop">
-                <div class="hop-num">1</div>
-                <div class="hop-ip">192.168.1.1</div>
-                <div class="hop-desc"><strong>Diploma in Computer Science</strong> | UiTM Kuala Terengganu (Oct 2022 - Feb 2025)</div>
+        <!-- Working Experience -->
+        <div class="section" id="experience">
+            <h2 class="section-title">Working Experience</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">IT Support Technician (Internship)</div>
+                        <div class="card-subtitle">Alpha Tech Computer Sdn. Bhd.</div>
+                    </div>
+                    <div class="card-date">Sep. 2024 – Feb. 2025</div>
+                </div>
+                <ul>
+                    <li>Installed and set up device wiring for hotel buildings in Kuala Terengganu.</li>
+                    <li>Troubleshot Ethernet switch cabling issues at a client office.</li>
+                    <li>Developed a static website for the company.</li>
+                </ul>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Alpha+Tech+Work', 'On-site server wiring and setup')">View Work Image</button>
             </div>
-            <div class="hop">
-                <div class="hop-num">2</div>
-                <div class="hop-ip">10.0.5.22</div>
-                <div class="hop-desc"><strong>IT Support Technician Intern</strong> | Alpha Tech Computer Sdn. Bhd. (Sep 2024 - Feb 2025)<br>
-                <span style="color:var(--text-muted); font-size: 12px;">Installed device wiring for hotels, troubleshot Ethernet cabling, and deployed a static company site.</span></div>
-            </div>
-            <div class="hop">
-                <div class="hop-num">3</div>
-                <div class="hop-ip">172.16.0.10</div>
-                <div class="hop-desc"><strong>B.Sc. (Hons.) Computer Networks</strong> | UiTM Jasin (Mar 2025 - Present)</div>
-            </div>
-            <div class="hop">
-                <div class="hop-num">4</div>
-                <div class="hop-ip">172.16.0.45</div>
-                <div class="hop-desc"><strong>Certifications Acquired</strong> | Google Cybersecurity Professional, Google Certified Educator (Oct 2026)</div>
-            </div>
-            <div class="hop destination">
-                <div class="hop-num">5</div>
-                <div class="hop-ip">203.0.113.1</div>
-                <div class="hop-desc"><strong>Target Destination: 2027 Internship Placement</strong> | Looking for Network/Cybersecurity Roles (Mar - Jun 2027)</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Production Runner (Part-time)</div>
+                        <div class="card-subtitle">NR Café Pata</div>
+                    </div>
+                    <div class="card-date">Aug. 2026 - Sep. 2026</div>
+                </div>
+                <ul>
+                    <li>Ensured timely service and maintained high customer satisfaction in a fast-paced environment.</li>
+                </ul>
             </div>
         </div>
-        
+
+        <!-- Technical Projects -->
+        <div class="section" id="projects">
+            <h2 class="section-title">Technical Projects</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">MQTT-BIDS: An Agentless Broker-Level Intrusion Detection System</div>
+                        <div class="card-subtitle">Final Year Project</div>
+                    </div>
+                    <div class="card-date">Expected Jan 2027</div>
+                </div>
+                <ul>
+                    <li>Developing a broker-level IDS for MQTT networks using Snort 3 signature rules within a GNS3 environment.</li>
+                    <li>Configured real-time observability using SQLite and Grafana dashboards to monitor broker flooding DoS attacks, malformed packets and unauthorized topic access.</li>
+                </ul>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Grafana+Dashboard', 'MQTT-BIDS Grafana Alert Dashboard')">View Project Image</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Network Automation of a Multi-Area OSPF, VLAN and DHCP Network</div>
+                        <div class="card-subtitle">WAN Technologies Project</div>
+                    </div>
+                    <div class="card-date">2026</div>
+                </div>
+                <ul>
+                    <li>Designed a GNS3 enterprise topology with three routers, a backbone switch and three VLANs.</li>
+                    <li>Automated Multi-Area OSPFv2, VLAN and DHCP configuration using Python and Netmiko over SSH.</li>
+                </ul>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=GNS3+Topology', 'GNS3 Multi-Area Topology')">View Topology Image</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">IoT Smart Home Automation System</div>
+                        <div class="card-subtitle">IoT Project</div>
+                    </div>
+                    <div class="card-date">2026</div>
+                </div>
+                <ul>
+                    <li>Designed an IoT-based smart home prototype utilizing an Arduino board and ESP8266 controller.</li>
+                    <li>Integrated multiple sensors to monitor environmental conditions and trigger automated responses displayed on a real-time Blynk dashboard.</li>
+                </ul>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=IoT+Hardware+Setup', 'Arduino & ESP8266 Hardware Setup')">View Hardware Image</button>
+            </div>
+        </div>
+
+        <!-- Leadership & Certifications -->
+        <div class="section" id="leadership">
+            <h2 class="section-title">Leadership & Certifications</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Leadership Experience</div>
+                </div>
+                <ul>
+                    <li><strong>Technical Support Committee</strong> | SULAM Programme, UiTM Kampus Jasin (Oct 2026 – Present) - Support technical works for "Project Netizen Hero!".</li>
+                    <li><strong>Admin Assistant & Technical Support</strong> | ICTFF8 Capture The Flag (Jan 2026).</li>
+                    <li><strong>Vice Treasurer</strong> | Networking Society Club (Aug 2025 – Jan 2026).</li>
+                    <li><strong>Secretary</strong> | Res-Q Association Club (Jan 2023 – Jun 2023) - Led voluntary assistance for students and local community.</li>
+                </ul>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Event+Photo', 'SULAM Event Technical Support')">View Event Image</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Certification & Training</div>
+                </div>
+                <ul>
+                    <li>Google Cybersecurity Professional Certificate – Coursera (Expected Dec. 2026)</li>
+                    <li>Google Certified Educator Level 1 (Oct. 2026)</li>
+                    <li>Cisco Networking Academy CCNA Courses: Intro to Networks; Switching, Routing, Wireless; Enterprise Networking, Security, & Automation</li>
+                    <li>Food Handler Training Course – Richkey Academy (Jul. 2026)</li>
+                </ul>
+                <button class="btn-media" onclick="openModal('https://via.placeholder.com/800x400?text=Certificates', 'Google & Cisco Certificates')">View Certificates</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal Structure -->
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✖</button>
+            <h3 id="modal-caption" class="modal-caption">Image Viewer</h3>
+            <!-- To use real images later, just replace the URL strings in the onclick events above with your actual image file names (e.g. 'cert.png') -->
+            <img id="modal-img" class="modal-img" src="" alt="Section Image">
+        </div>
     </div>
 
     <script>
-        // 1. Telemetry Typing Effect
-        const telemetryLines = [
-            "Initializing secure connection...",
-            "Resolving host: amirul_husaini.local",
-            "Loading profile data: B.Sc. Computer Networks",
-            "Checking dependencies: Python, GNS3, Snort3 [OK]",
-            "Mounting SQLite database: alerts.db [OK]",
-            "Launching Grafana observability dashboard...",
-            "Status: System online. Ready for 2027 Deployment."
-        ];
-        
-        const telemetryBox = document.getElementById('telemetry-box');
-        let currentLine = 0;
+        // --- Theme Toggle Logic ---
+        const themeBtn = document.getElementById('themeBtn');
+        const rootAttr = document.documentElement;
 
-        function injectLine() {
-            if (currentLine < telemetryLines.length) {
-                const div = document.createElement('div');
-                div.className = 'telemetry-line';
-                div.textContent = `> ${telemetryLines[currentLine]}`;
-                telemetryBox.appendChild(div);
-                currentLine++;
-                setTimeout(injectLine, 600); // 600ms delay between lines
-            }
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = rootAttr.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            rootAttr.setAttribute('data-theme', newTheme);
+            initColors(); // update canvas colors instantly
+        });
+
+        // --- Image Modal Logic ---
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalCaption = document.getElementById('modal-caption');
+
+        // This function is triggered by the buttons in the HTML
+        function openModal(imageSrc, captionText) {
+            modalImg.src = imageSrc;
+            modalCaption.textContent = captionText;
+            modal.classList.add('active');
         }
-        setTimeout(injectLine, 500);
 
-        // 2. Network Data Packet Canvas Background
-        const canvas = document.getElementById('network-canvas');
+        function closeModal() {
+            modal.classList.remove('active');
+            setTimeout(() => { modalImg.src = ''; }, 300); // clear after fade
+        }
+
+        // Close when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+
+        // --- Mesh Constellation Background Logic ---
+        const canvas = document.getElementById('mesh-canvas');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
         let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+        let lineColor = '';
+        let dotColor = '';
 
-        function resize() {
+        function initColors() {
+            const style = getComputedStyle(rootAttr);
+            // Grab CSS variables based on current theme
+            lineColor = style.getPropertyValue('--accent').trim() || '#00f0ff';
+            dotColor = style.getPropertyValue('--text-muted').trim() || '#94a3b8';
+        }
+
+        function resizeCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resize);
-        resize();
+        window.addEventListener('resize', resizeCanvas);
+        
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
-        class Particle {
+        class Node {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 2; // Move horizontally
-                this.vy = (Math.random() - 0.5) * 0.5; // Slight vertical drift
-                this.size = Math.random() * 2;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.size = Math.random() * 2 + 1;
             }
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
                 
-                // Wrap around edges
-                if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
+                // Bounce off edges smoothly
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
             }
             draw() {
-                ctx.fillStyle = '#00f0ff';
+                ctx.fillStyle = dotColor;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 70; i++) {
-            particles.push(new Particle());
+        function initNodes() {
+            particles = [];
+            let numberOfNodes = (width * height) / 12000; 
+            for (let i = 0; i < numberOfNodes; i++) {
+                particles.push(new Node());
+            }
         }
 
-        function animate() {
+        function animateMesh() {
             ctx.clearRect(0, 0, width, height);
             
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
                 
-                // Draw connecting lines to simulate packet routes
+                // Connect particles to each other
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (dist < 120) {
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.2 - dist / 600})`;
-                        ctx.lineWidth = 1;
+                    if (distance < 100) {
                         ctx.beginPath();
+                        ctx.strokeStyle = lineColor;
+                        ctx.globalAlpha = 1 - (distance / 100);
+                        ctx.lineWidth = 0.8;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
+                        ctx.globalAlpha = 1.0;
+                    }
+                }
+
+                // Connect particles to mouse
+                if (mouse.x != null) {
+                    let dx = particles[i].x - mouse.x;
+                    let dy = particles[i].y - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = lineColor;
+                        ctx.globalAlpha = 1 - (distance / mouse.radius);
+                        ctx.lineWidth = 1.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                        ctx.globalAlpha = 1.0;
                     }
                 }
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateMesh);
         }
-        animate();
+
+        // Initialize everything
+        initColors();
+        resizeCanvas();
+        initNodes();
+        animateMesh();
+
     </script>
 </body>
 </html>
