@@ -129,4 +129,1027 @@
             @keyframes spin { to { transform: rotate(360deg) } }
 
             .float { position: absolute; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; box-shadow: var(--shadow); font-size: 13px; display: flex; gap: 10px; align-items: center; animation: bob 5s ease-in-out infinite }
-            .float b { font-family: var(--display); font-size: 18px;
+            .float b { font-family: var(--display); font-size: 18px; display: block; line-height: 1.1 }
+            .float span { color: var(--muted) }
+            .float .ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--soft); color: var(--accent); font-family: var(--mono); font-weight: 700; font-size: 12px }
+            .f1 { left: -46px; top: 18% }
+            .f2 { right: -40px; top: 52%; animation-delay: -2.5s }
+            .f3 { left: -20px; bottom: -14px; animation-delay: -1.2s }
+            @keyframes bob { 50% { transform: translateY(-8px) } }
+
+            /* stat strip */
+            .stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 30px 0 0 }
+            .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow) }
+            .stat .n { font-family: var(--display); font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.02em }
+            .stat .n small { font-size: 15px; color: var(--muted); font-weight: 500 }
+            .stat .l { color: var(--muted); font-size: 13.5px }
+
+            /* sections */
+            section { padding: 72px 0 0; scroll-margin-top: 70px }
+            .head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 26px }
+            .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px }
+            .head h2 { font-size: clamp(26px,3.4vw,36px); letter-spacing: -.02em }
+            .head p { color: var(--muted); margin: 6px 0 0; max-width: 56ch }
+            .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow) }
+
+            /* availability */
+            .availgrid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px }
+            .window { padding: 26px }
+            .window .dates { font-family: var(--display); font-size: clamp(24px,3vw,32px); font-weight: 700; letter-spacing: -.02em }
+            .window .dates span { color: var(--accent) }
+            .count { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 22px 0 }
+            .count div { background: var(--soft); border-radius: 14px; padding: 14px 8px; text-align: center }
+            .count b { display: block; font-family: var(--display); font-size: 30px; font-variant-numeric: tabular-nums; line-height: 1 }
+            .count small { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em }
+            .timeline-bar { position: relative; height: 8px; border-radius: 99px; background: var(--line); margin: 8px 0 8px }
+            .timeline-bar i { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; transform: translate(-50%,-50%); border: 3px solid var(--surface) }
+            .tl-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); font-family: var(--mono) }
+            .looking { padding: 26px; display: flex; flex-direction: column; gap: 14px }
+            .looking h3 { font-size: 18px }
+            .role-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none }
+            .role-list li { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; font-weight: 600; font-size: 14.5px }
+            .role-list li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); flex: none }
+
+            /* terminal */
+            .term { background: #0b1320; color: #cfe3f5; border-radius: 18px; overflow: hidden; border: 1px solid #1d2b40; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6) }
+            .term .bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #111c2c; border-bottom: 1px solid #1d2b40 }
+            .term .bar i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57 }
+            .term .bar i:nth-child(2) { background: #febc2e }
+            .term .bar i:nth-child(3) { background: #28c840 }
+            .term .bar span { margin-left: 10px; font-family: var(--mono); font-size: 12px; color: #7d93ad }
+            .term .out { height: 300px; overflow: auto; padding: 16px 18px; font-family: var(--mono); font-size: 13.5px; line-height: 1.65; white-space: pre-wrap }
+            .term .out .p { color: #4ade80 }
+            .term .out .c { color: #38bdf8 }
+            .term .out .y { color: #f6b75a }
+            .term .out .d { color: #7d93ad }
+            .term form { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-top: 1px solid #1d2b40; font-family: var(--mono); font-size: 13.5px }
+            .term form label { color: #4ade80; white-space: nowrap }
+            .term input { flex: 1; background: transparent; border: 0; color: #e7eef7; font: inherit; outline: none; min-width: 0 }
+            .quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 14px }
+            .quick button { font-family: var(--mono); font-size: 12px; background: #132236; color: #9fc3e2; border: 1px solid #23384f; border-radius: 7px; padding: 4px 9px; cursor: pointer }
+            .quick button:hover { color: #fff; border-color: #38bdf8 }
+
+            /* skills */
+            .skills { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px }
+            .topo { position: relative; min-height: 400px; overflow: hidden }
+            #topo { width: 100%; height: 100%; min-height: 400px; display: block; cursor: pointer }
+            .topo .hint { position: absolute; left: 16px; top: 14px; font-size: 12px; color: var(--muted); font-family: var(--mono) }
+            .skillpanel { padding: 24px; display: flex; flex-direction: column; gap: 14px }
+            .skillpanel .tag-if { font-family: var(--mono); font-size: 12px; color: var(--muted) }
+            .skillpanel h3 { font-size: 22px }
+            .chips { display: flex; flex-wrap: wrap; gap: 8px }
+            .chip { font-size: 13.5px; font-weight: 600; padding: 7px 12px; border-radius: 10px; background: var(--soft); color: var(--ink); border: 1px solid transparent }
+            .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto }
+            .tabs button { border: 1px solid var(--line); background: transparent; border-radius: 9px; padding: 6px 11px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer }
+            .tabs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+
+            /* projects */
+            .filters { display: flex; gap: 6px; flex-wrap: wrap }
+            .filters button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 13.5px; color: var(--muted); cursor: pointer }
+            .filters button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent) }
+            .pgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px }
+            .proj { padding: 24px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; text-align: left; transition: transform .2s,border-color .2s; position: relative; overflow: hidden }
+            .proj:hover { transform: translateY(-4px); border-color: var(--accent) }
+            .proj .top { display: flex; justify-content: space-between; align-items: center; gap: 10px }
+            .proj .type { font-family: var(--mono); font-size: 12px; color: var(--muted) }
+            .badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap }
+            .badge.live { color: var(--accent-2); background: color-mix(in srgb,var(--accent-2) 15%,transparent) }
+            .badge.done { color: var(--up); background: color-mix(in srgb,var(--up) 13%,transparent) }
+            .proj h3 { font-size: 19px; line-height: 1.3 }
+            .proj p { margin: 0; color: var(--muted); font-size: 14.5px }
+            .proj .more { margin-top: auto; font-weight: 700; font-size: 14px; color: var(--accent) }
+            .proj .glyph { position: absolute; right: -18px; bottom: -30px; font-family: var(--mono); font-size: 120px; font-weight: 700; color: var(--soft); z-index: 0; line-height: 1; pointer-events: none }
+            .proj>*:not(.glyph) { position: relative; z-index: 1 }
+            .proj[hidden] { display: none }
+
+            /* journey */
+            .jtabs { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px }
+            .jtabs button { border: 0; background: transparent; padding: 8px 14px; border-radius: 9px; font-weight: 700; font-size: 14px; color: var(--muted); cursor: pointer }
+            .jtabs button[aria-selected="true"] { background: var(--ink); color: var(--bg) }
+            .tl { position: relative; padding: 8px 0 0 30px }
+            .tl::before { content: ""; position: absolute; left: 9px; top: 14px; bottom: 10px; width: 2px; background: linear-gradient(var(--accent),var(--line)) }
+            .tl-item { position: relative; padding: 16px 20px; margin-bottom: 12px }
+            .tl-item::before { content: ""; position: absolute; left: -27px; top: 24px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent) }
+            .tl-item .when { font-family: var(--mono); font-size: 12.5px; color: var(--accent) }
+            .tl-item h3 { font-size: 17px; margin: 2px 0 }
+            .tl-item .org { color: var(--muted); font-weight: 600; font-size: 14px }
+            .tl-item p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px }
+            .tlpane[hidden] { display: none }
+
+            /* extras */
+            .extras { display: grid; grid-template-columns: 1fr 1fr; gap: 16px }
+            .extras .card { padding: 24px }
+            .extras h3 { font-size: 18px; margin-bottom: 14px }
+            .cert { display: flex; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line) }
+            .cert:first-of-type { border-top: 0 }
+            .cert .ic { width: 40px; height: 40px; border-radius: 11px; background: var(--soft); display: grid; place-items: center; color: var(--accent); font-family: var(--mono); font-weight: 700; font-size: 12px; flex: none }
+            .cert b { display: block; font-size: 15px }
+            .cert span { color: var(--muted); font-size: 13.5px }
+            
+            /* contact */
+            .contact { padding: 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: center; background: linear-gradient(135deg,var(--ink),color-mix(in srgb,var(--ink) 80%,var(--accent))); color: var(--bg); border: 0 }
+            .contact h2 { font-size: clamp(26px,3.6vw,38px); letter-spacing: -.02em }
+            .contact p { opacity: .8; margin: 10px 0 0 }
+            .contact .rows { display: flex; flex-direction: column; gap: 10px }
+            .crow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb,var(--bg) 10%,transparent); border: 1px solid color-mix(in srgb,var(--bg) 22%,transparent) }
+            .crow small { display: block; opacity: .7; font-size: 12px }
+            .crow b { font-size: 15px; word-break: break-all }
+            .crow button,.crow a { flex: none; border: 0; background: var(--bg); color: var(--ink); padding: 8px 12px; border-radius: 9px; font-weight: 700; font-size: 13px; cursor: pointer }
+
+            footer { padding: 40px 0 50px; text-align: center; color: var(--muted); font-size: 13px }
+
+            /* modal + palette */
+            .overlay { position: fixed; inset: 0; background: rgba(6,12,22,.55); backdrop-filter: blur(4px); z-index: 50; display: none; align-items: flex-start; justify-content: center; padding: 10vh 16px 16px; overflow: auto }
+            .overlay.open { display: flex }
+            .modal { width: min(640px,100%); background: var(--surface); border-radius: 22px; border: 1px solid var(--line); box-shadow: 0 40px 80px rgba(0,0,0,.35); padding: 28px; animation: pop .2s ease-out }
+            @keyframes pop { from { transform: translateY(10px) scale(.98); opacity: 0 } }
+            .modal .x { float: right }
+            .modal h3 { font-size: 22px; margin: 6px 0 10px }
+            .modal ul { color: var(--muted); padding-left: 20px }
+            .palette { width: min(560px,100%); background: var(--surface); border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 40px 80px rgba(0,0,0,.35); overflow: hidden; animation: pop .15s ease-out }
+            .palette input { width: 100%; border: 0; border-bottom: 1px solid var(--line); padding: 18px 20px; font: inherit; font-size: 16px; background: transparent; color: var(--ink); outline: none }
+            .palette ul { list-style: none; margin: 0; padding: 8px; max-height: 340px; overflow: auto }
+            .palette li button { width: 100%; text-align: left; border: 0; background: transparent; padding: 11px 12px; border-radius: 10px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600 }
+            .palette li button[aria-selected="true"],.palette li button:hover { background: var(--soft) }
+            .palette li small { color: var(--muted); font-weight: 500 }
+            .toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(30px); background: var(--ink); color: var(--bg); padding: 11px 18px; border-radius: 12px; font-weight: 700; font-size: 14px; opacity: 0; transition: .25s; z-index: 60; pointer-events: none }
+            .toast.show { opacity: 1; transform: translateX(-50%) translateY(0) }
+            .totop { position: fixed; right: 20px; bottom: 20px; z-index: 25; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); cursor: pointer; opacity: 0; pointer-events: none; transition: .2s; font-size: 18px }
+            .totop.show { opacity: 1; pointer-events: auto }
+
+            @media (max-width: 960px) {
+                .hero,.availgrid,.skills,.extras,.contact { grid-template-columns:1fr }
+                .portrait { width: min(320px,80%); margin-top: 20px }
+                .pgrid { grid-template-columns: 1fr }
+                .stats { grid-template-columns: repeat(2,1fr) }
+                .links { display: none }
+                .f1 { left: -14px }
+                .f2 { right: -14px }
+            }
+            @media (max-width: 480px) {
+                .count b { font-size:22px }
+            }
+            @media (prefers-reduced-motion:reduce) {
+                * { animation: none!important; transition: none!important }
+                html { scroll-behavior: auto }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="progress" id="progress"></div>
+        <canvas id="bgnet" aria-hidden="true"></canvas>
+        <header class="nav">
+            <div class="wrap">
+                <a class="brand" href="#top">
+                    <span class="logo">AH</span>Amirul Husaini
+                </a>
+                <nav class="links" aria-label="Sections">
+                    <a href="#availability">Availability</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#journey">Journey</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <button class="iconbtn" id="openPalette" type="button" aria-label="Open quick search">
+                    ⌕ <kbd>Ctrl K</kbd>
+                </button>
+                <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch colour theme">◐</button>
+            </div>
+        </header>
+        <main class="wrap" id="top">
+            <div class="hero">
+                <div>
+                    <span class="avail">
+                        <span class="pulse"></span>Seeking 2027 Internship · 15 Mar – 18 Jun
+                    </span>
+                    <h1>
+                        Hi, I’m <span class="grad">Amirul</span>.<br>I secure and automate networks.
+                    </h1>
+                    <p class="fullname">Amirul Husaini Bin Abdul Manaf · Kuala Nerus, Terengganu</p>
+                    <div class="rotator" aria-live="polite">
+                        <span class="d">&gt; </span>
+                        <span id="rot">Network security and IDS using Snort 3</span>
+                        <span class="caret"></span>
+                    </div>
+                    <p class="lede">Final-year B.Sc. (Hons.) Computer Networks student at UiTM Jasin. I build intrusion detection systems, simulate wireless topologies, and automate enterprise networks. Looking for an internship to apply these skills professionally.</p>
+                    <div class="ctas">
+                        <a class="btn primary" href="#contact">Hire me as an intern →</a>
+                        <a class="btn" href="#projects">See my projects</a>
+                        <a class="btn" href="https://www.linkedin.com/in/amirulhusaini" target="_blank">LinkedIn ↗</a>
+                    </div>
+                </div>
+                <div class="portrait">
+                    <div class="orbit"></div>
+                    <div class="photo">
+                        <!-- Replace with your actual image path if you have one on GitHub -->
+                        <div class="placeholder">Add your photo here<br>(e.g. img src="profile.jpg")</div>
+                    </div>
+                    <div class="float f1">
+                        <span class="ic">GPA</span>
+                        <div>
+                            <b>3.88</b>
+                            <span>Degree CGPA</span>
+                        </div>
+                    </div>
+                    <div class="float f2">
+                        <span class="ic">BIDS</span>
+                        <div>
+                            <b>MQTT + Snort</b>
+                            <span>Final Year Project</span>
+                        </div>
+                    </div>
+                    <div class="float f3">
+                        <span class="ic">CCNA</span>
+                        <div>
+                            <b>Trained</b>
+                            <span>Cisco NetAcad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="n" data-count="3.88" data-dec="2">
+                        3.88 <small>/ 4.00</small>
+                    </div>
+                    <div class="l">Degree CGPA</div>
+                </div>
+                <div class="stat">
+                    <div class="n" data-count="6">
+                        6 <small>months</small>
+                    </div>
+                    <div class="l">IT Support Internship Exp.</div>
+                </div>
+                <div class="stat">
+                    <div class="n" data-count="3">3</div>
+                    <div class="l">Core Technical Projects</div>
+                </div>
+                <div class="stat">
+                    <div class="n" data-count="4">4</div>
+                    <div class="l">Leadership / Committee Roles</div>
+                </div>
+            </div>
+            
+            <section id="availability">
+                <div class="head">
+                    <div>
+                        <div class="kicker">Availability</div>
+                        <h2>Ready for industrial training</h2>
+                        <p>Seeking a formal internship placement as required by my UiTM degree program.</p>
+                    </div>
+                </div>
+                <div class="availgrid">
+                    <div class="card window">
+                        <div class="dates">
+                            15 Mar <span>→</span> 18 Jun 2027
+                        </div>
+                        <div class="count" aria-live="off">
+                            <div>
+                                <b id="cd-d">—</b>
+                                <small>days</small>
+                            </div>
+                            <div>
+                                <b id="cd-h">—</b>
+                                <small>hours</small>
+                            </div>
+                            <div>
+                                <b id="cd-m">—</b>
+                                <small>mins</small>
+                            </div>
+                            <div>
+                                <b id="cd-s">—</b>
+                                <small>secs</small>
+                            </div>
+                        </div>
+                        <div class="timeline-bar" id="tlbar">
+                            <i style="left:0;background:var(--muted)"></i>
+                            <i id="startDot" style="background:var(--accent)"></i>
+                            <i style="left:100%;background:var(--up)"></i>
+                        </div>
+                        <div class="tl-labels">
+                            <span>today</span>
+                            <span>start 15 Mar 2027</span>
+                            <span>end 18 Jun</span>
+                        </div>
+                    </div>
+                    <div class="card looking">
+                        <h3>Roles I’m looking for</h3>
+                        <ul class="role-list">
+                            <li>Computer Networking Intern</li>
+                            <li>Cybersecurity / SOC Intern</li>
+                            <li>Network Operations (NOC) Intern</li>
+                            <li>IT Infrastructure & Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="terminal">
+                <div class="head">
+                    <div>
+                        <div class="kicker">Interactive</div>
+                        <h2>Ask my terminal</h2>
+                        <p>Type a command or tap one below. Try <span class="mono">help</span>.</p>
+                    </div>
+                </div>
+                <div class="term">
+                    <div class="bar">
+                        <i></i><i></i><i></i>
+                        <span>amirul@uitm-jasin: ~</span>
+                    </div>
+                    <div class="out" id="out" tabindex="0" aria-live="polite"></div>
+                    <div class="quick" id="quick"></div>
+                    <form id="termForm" autocomplete="off">
+                        <label for="cmd">amirul@uitm:~$</label>
+                        <input id="cmd" name="cmd" spellcheck="false" placeholder="type a command…">
+                    </form>
+                </div>
+            </section>
+
+            <section id="skills">
+                <div class="head">
+                    <div>
+                        <div class="kicker">Skills</div>
+                        <h2>My network of skills</h2>
+                        <p>Every skill area links back to the core. Click a node to inspect it.</p>
+                    </div>
+                </div>
+                <div class="skills">
+                    <div class="card topo">
+                        <canvas id="topo" aria-label="Diagram of skill areas connected to a core router"></canvas>
+                        <div class="hint">click a node ↘</div>
+                    </div>
+                    <div class="card skillpanel" aria-live="polite">
+                        <div class="tag-if" id="sk-if">Gi0/1 · up</div>
+                        <h3 id="sk-title">Networking & Protocols</h3>
+                        <div class="chips" id="sk-chips"></div>
+                        <div class="tabs" id="sk-tabs" role="group" aria-label="Skill areas"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects">
+                <div class="head">
+                    <div>
+                        <div class="kicker">Projects</div>
+                        <h2>Things I’ve built</h2>
+                        <p>Click a card for the details.</p>
+                    </div>
+                    <div class="filters" id="filters" role="group" aria-label="Filter projects">
+                        <button type="button" data-f="all" aria-pressed="true">All</button>
+                        <button type="button" data-f="sec" aria-pressed="false">Security</button>
+                        <button type="button" data-f="net" aria-pressed="false">Networking</button>
+                        <button type="button" data-f="iot" aria-pressed="false">IoT</button>
+                    </div>
+                </div>
+                <div class="pgrid" id="pgrid"></div>
+            </section>
+
+            <section id="journey">
+                <div class="head">
+                    <div>
+                        <div class="kicker">Journey</div>
+                        <h2>Where I’ve been</h2>
+                    </div>
+                    <div class="jtabs" role="tablist" aria-label="Journey">
+                        <button type="button" role="tab" id="t-exp" aria-selected="true" aria-controls="p-exp">Experience</button>
+                        <button type="button" role="tab" id="t-edu" aria-selected="false" aria-controls="p-edu">Education</button>
+                        <button type="button" role="tab" id="t-lead" aria-selected="false" aria-controls="p-lead">Leadership</button>
+                    </div>
+                </div>
+                <div class="tlpane tl" id="p-exp" role="tabpanel" aria-labelledby="t-exp">
+                    <div class="card tl-item">
+                        <div class="when">Sep 2024 – Feb 2025</div>
+                        <h3>IT Support Technician (Internship)</h3>
+                        <div class="org">Alpha Tech Computer Sdn. Bhd., Kuala Terengganu</div>
+                        <p>Installed and set up device wiring for hotel buildings, troubleshot Ethernet switch cabling issues at client offices, and developed a static website for the company.</p>
+                    </div>
+                    <div class="card tl-item">
+                        <div class="when">Aug 2026 – Sep 2026</div>
+                        <h3>Production Runner (Part-time)</h3>
+                        <div class="org">NR Café Pata</div>
+                        <p>Ensured timely service and maintained high customer satisfaction in a fast-paced environment.</p>
+                    </div>
+                </div>
+                <div class="tlpane tl" id="p-edu" role="tabpanel" aria-labelledby="t-edu" hidden>
+                    <div class="card tl-item">
+                        <div class="when">Mar 2025 – Present · CGPA 3.88</div>
+                        <h3>B.Sc. (Hons.) Computer Networks</h3>
+                        <div class="org">Universiti Teknologi MARA, Kampus Jasin, Melaka</div>
+                        <p>Final-year student specializing in network automation, wireless simulations, and cybersecurity.</p>
+                    </div>
+                    <div class="card tl-item">
+                        <div class="when">Oct 2022 – Feb 2025</div>
+                        <h3>Diploma in Computer Science</h3>
+                        <div class="org">Universiti Teknologi MARA, Kampus Kuala Terengganu</div>
+                    </div>
+                    <div class="card tl-item">
+                        <div class="when">2017 – 2021</div>
+                        <h3>SPM – Pure Science</h3>
+                        <div class="org">Maktab Rendah Sains MARA, Pengkalan Chepa, Kelantan</div>
+                        <p>Results: 5A.</p>
+                    </div>
+                </div>
+                <div class="tlpane tl" id="p-lead" role="tabpanel" aria-labelledby="t-lead" hidden>
+                    <div class="card tl-item">
+                        <div class="when">Oct 2026 – Present</div>
+                        <h3>Technical Support Committee</h3>
+                        <div class="org">SULAM Programme, UiTM Kampus Jasin</div>
+                        <p>Supporting technical works for the "Project Netizen Hero!" community programme.</p>
+                    </div>
+                    <div class="card tl-item">
+                        <div class="when">Jan 2026</div>
+                        <h3>Admin Assistant & Technical Support</h3>
+                        <div class="org">ICTFF8 Capture The Flag, UiTM Kampus Jasin</div>
+                    </div>
+                    <div class="card tl-item">
+                        <div class="when">Aug 2025 – Jan 2026</div>
+                        <h3>Vice Treasurer</h3>
+                        <div class="org">Networking Society Club, UiTM Kampus Jasin</div>
+                    </div>
+                    <div class="card tl-item">
+                        <div class="when">Jan 2023 – Jun 2023</div>
+                        <h3>Secretary</h3>
+                        <div class="org">Res-Q Association Club, UiTM Kampus Kuala Terengganu</div>
+                        <p>Led voluntary assistance for UiTM students and the local community.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certs">
+                <div class="extras">
+                    <div class="card">
+                        <h3>Certifications & training</h3>
+                        <div class="cert">
+                            <span class="ic">GCP</span>
+                            <div>
+                                <b>Google Cybersecurity Professional Certificate</b>
+                                <span>Coursera (Expected Dec 2026)</span>
+                            </div>
+                        </div>
+                        <div class="cert">
+                            <span class="ic">CCNA</span>
+                            <div>
+                                <b>Cisco Networking Academy</b>
+                                <span>Introduction to Networks; Switching, Routing, & Wireless; Enterprise Networking, Security, & Automation</span>
+                            </div>
+                        </div>
+                        <div class="cert">
+                            <span class="ic">GCE</span>
+                            <div>
+                                <b>Google Certified Educator Level 1</b>
+                                <span>Oct 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <div class="card contact">
+                    <div>
+                        <h2>Have a placement from March 2027?</h2>
+                        <p>I’m looking to bring my networking and security skills to a professional environment. Email is the best way to reach me.</p>
+                    </div>
+                    <div class="rows">
+                        <div class="crow">
+                            <div>
+                                <small>Email</small>
+                                <b>amirulhusaini.am@gmail.com</b>
+                            </div>
+                            <button type="button" data-copy="amirulhusaini.am@gmail.com">Copy</button>
+                        </div>
+                        <div class="crow">
+                            <div>
+                                <small>LinkedIn</small>
+                                <b>linkedin.com/in/amirulhusaini</b>
+                            </div>
+                            <a href="https://www.linkedin.com/in/amirulhusaini" target="_blank">Open ↗</a>
+                        </div>
+                        <div class="crow">
+                            <div>
+                                <small>GitHub</small>
+                                <b>github.com/Myrunn</b>
+                            </div>
+                            <a href="https://github.com/Myrunn" target="_blank">Open ↗</a>
+                        </div>
+                        <div class="crow">
+                            <div>
+                                <small>Location</small>
+                                <b>Kuala Nerus, Terengganu / Jasin, Melaka</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            Portfolio for Amirul Husaini Bin Abdul Manaf · <span class="mono">Network Engineer in Training</span>
+        </footer>
+
+        <button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
+        <div class="toast" id="toast" role="status"></div>
+        
+        <!-- Modals -->
+        <div class="overlay" id="projOverlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
+            <div class="modal">
+                <button class="iconbtn x" type="button" data-close>✕</button>
+                <div class="kicker" id="m-type"></div>
+                <h3 id="m-title"></h3>
+                <ul id="m-list"></ul>
+                <div class="chips" id="m-chips"></div>
+            </div>
+        </div>
+        <div class="overlay" id="palOverlay" role="dialog" aria-modal="true" aria-label="Quick search">
+            <div class="palette">
+                <input id="palInput" placeholder="Jump to a section or action…" aria-label="Search">
+                <ul id="palList"></ul>
+            </div>
+        </div>
+
+        <script>
+            (function() {
+                var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+                function $(s) { return document.querySelector(s) }
+                function toast(msg) {
+                    var t = $('#toast');
+                    t.textContent = msg;
+                    t.classList.add('show');
+                    clearTimeout(t._h);
+                    t._h = setTimeout(function() { t.classList.remove('show') }, 1800)
+                }
+                function copy(text) {
+                    try {
+                        navigator.clipboard.writeText(text).then(function() {
+                            toast('Copied: ' + text)
+                        }, function() { toast('Copy failed.') })
+                    } catch (e) { toast('Copy failed.') }
+                }
+
+                /* theme */
+                var root = document.documentElement;
+                try {
+                    var saved = localStorage.getItem('ah-theme');
+                    if (saved) root.setAttribute('data-theme', saved)
+                } catch (e) {}
+                function isDark() {
+                    var t = root.getAttribute('data-theme');
+                    if (t) return t === 'dark';
+                    return matchMedia('(prefers-color-scheme: dark)').matches
+                }
+                $('#themeBtn').addEventListener('click', function() {
+                    var n = isDark() ? 'light' : 'dark';
+                    root.setAttribute('data-theme', n);
+                    try { localStorage.setItem('ah-theme', n) } catch (e) {}
+                    refreshColors();
+                    toast(n === 'dark' ? 'Dark mode on' : 'Light mode on')
+                });
+
+                /* colours */
+                var C = {};
+                function refreshColors() {
+                    var s = getComputedStyle(root);
+                    ['--accent', '--accent-2', '--ink', '--muted', '--line', '--surface', '--up', '--soft', '--bg'].forEach(function(k) {
+                        C[k] = s.getPropertyValue(k).trim()
+                    });
+                    C.netLine = s.getPropertyValue('--net-line').trim()
+                }
+                refreshColors();
+
+                /* scroll logic */
+                var links = [].slice.call(document.querySelectorAll('.links a'));
+                function onScroll() {
+                    var h = document.documentElement;
+                    var p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+                    $('#progress').style.width = (p * 100) + '%';
+                    $('#totop').classList.toggle('show', h.scrollTop > 600);
+                    var cur = '';
+                    ['availability', 'skills', 'projects', 'journey', 'contact'].forEach(function(id) {
+                        var el = document.getElementById(id);
+                        if (el && el.getBoundingClientRect().top < 120) cur = id
+                    });
+                    links.forEach(function(a) {
+                        a.classList.toggle('on', a.getAttribute('href') === '#' + cur)
+                    })
+                }
+                addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+                $('#totop').addEventListener('click', function() {
+                    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+                });
+
+                /* background network */
+                var bg = $('#bgnet'), bx = bg.getContext('2d'), pts = [], mouse = { x: -999, y: -999 };
+                function bgSize() {
+                    var d = devicePixelRatio || 1;
+                    bg.width = innerWidth * d; bg.height = innerHeight * d;
+                    bx.setTransform(d, 0, 0, d, 0, 0);
+                    var n = Math.min(70, Math.floor(innerWidth * innerHeight / 22000));
+                    pts = [];
+                    for (var i = 0; i < n; i++)
+                        pts.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3 })
+                }
+                addEventListener('resize', bgSize);
+                bgSize();
+                addEventListener('mousemove', function(e) { mouse.x = e.clientX; mouse.y = e.clientY });
+                function bgDraw() {
+                    bx.clearRect(0, 0, innerWidth, innerHeight);
+                    for (var i = 0; i < pts.length; i++) {
+                        var p = pts[i];
+                        if (!reduce) {
+                            p.x += p.vx; p.y += p.vy;
+                            if (p.x < 0 || p.x > innerWidth) p.vx *= -1;
+                            if (p.y < 0 || p.y > innerHeight) p.vy *= -1
+                        }
+                        for (var j = i + 1; j < pts.length; j++) {
+                            var q = pts[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+                            if (d < 130) {
+                                bx.strokeStyle = 'rgba(' + C.netLine + ',' + (0.13 * (1 - d / 130)) + ')';
+                                bx.lineWidth = 1; bx.beginPath(); bx.moveTo(p.x, p.y); bx.lineTo(q.x, q.y); bx.stroke()
+                            }
+                        }
+                        var md = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+                        if (md < 170) {
+                            bx.strokeStyle = 'rgba(' + C.netLine + ',' + (0.35 * (1 - md / 170)) + ')';
+                            bx.beginPath(); bx.moveTo(p.x, p.y); bx.lineTo(mouse.x, mouse.y); bx.stroke()
+                        }
+                        bx.fillStyle = 'rgba(' + C.netLine + ',.45)';
+                        bx.beginPath(); bx.arc(p.x, p.y, 1.8, 0, 7); bx.fill()
+                    }
+                    if (!reduce) requestAnimationFrame(bgDraw)
+                }
+                bgDraw();
+
+                /* role rotator */
+                var roles = ['Network security and IDS using Snort 3', 'Network automation with Python & SSH', 'Wireless network simulation in NS-3 & GNS3', 'IoT smart home integration with Arduino']
+                  , ri = 0, rot = $('#rot');
+                function typeRole() {
+                    if (reduce) return;
+                    var target = roles[ri], i = 0;
+                    rot.textContent = '';
+                    var t = setInterval(function() {
+                        rot.textContent = target.slice(0, ++i);
+                        if (i >= target.length) {
+                            clearInterval(t);
+                            setTimeout(function() {
+                                ri = (ri + 1) % roles.length;
+                                typeRole()
+                            }, 2200)
+                        }
+                    }, 38)
+                }
+                setTimeout(typeRole, 2200);
+
+                /* stat count-up */
+                if (!reduce) {
+                    document.querySelectorAll('[data-count]').forEach(function(el) {
+                        var to = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), small = el.querySelector('small'), sm = small ? small.outerHTML : '', t0 = null;
+                        function f(ts) {
+                            if (!t0) t0 = ts;
+                            var k = Math.min(1, (ts - t0) / 1100), v = to * (1 - Math.pow(1 - k, 3));
+                            el.innerHTML = v.toFixed(dec) + (sm ? ' ' + sm : '');
+                            if (k < 1) requestAnimationFrame(f)
+                        }
+                        requestAnimationFrame(f)
+                    });
+                }
+
+                /* countdown + timeline */
+                var start = new Date('2027-03-15T08:00:00+08:00'), end = new Date('2027-06-18T17:00:00+08:00'), t0 = new Date();
+                function pad(n) { return String(n).padStart(2, '0') }
+                function cd() {
+                    var now = new Date(), ms = start - now;
+                    if (ms < 0) {
+                        $('#cd-d').textContent = now < end ? 'Live' : 'Done';
+                        ['#cd-h', '#cd-m', '#cd-s'].forEach(function(s) { $(s).textContent = '00' });
+                        return
+                    }
+                    $('#cd-d').textContent = Math.floor(ms / 864e5);
+                    $('#cd-h').textContent = pad(Math.floor(ms / 36e5) % 24);
+                    $('#cd-m').textContent = pad(Math.floor(ms / 6e4) % 60);
+                    $('#cd-s').textContent = pad(Math.floor(ms / 1e3) % 60)
+                }
+                cd(); setInterval(cd, 1000);
+                var span = end - t0;
+                function pos(d) { return Math.max(0, Math.min(100, (d - t0) / span * 100)) }
+                $('#startDot').style.left = pos(start) + '%';
+
+                /* Data Customization for Amirul Husaini */
+                var SK = [{
+                    id: 'net',
+                    label: 'Networking',
+                    title: 'Networking & Protocols',
+                    items: ['TCP/IP', 'LAN/WAN', 'Routing & Switching', 'OSPF', 'BGP', 'EIGRP', 'VLANs', 'DHCP', 'DNS', 'MQTT']
+                }, {
+                    id: 'sec',
+                    label: 'Security',
+                    title: 'Network Security',
+                    items: ['Snort 3 IDS', 'Scapy', 'Access Control Lists (ACLs)', 'VPN', 'Network Segmentation']
+                }, {
+                    id: 'sim',
+                    label: 'Simulation',
+                    title: 'Network Tools & Simulation',
+                    items: ['GNS3', 'NS-3', 'Cisco Packet Tracer', 'Wireshark', 'iPerf3', 'Docker', 'Kali Linux']
+                }, {
+                    id: 'auto',
+                    label: 'Automation',
+                    title: 'Configuration & Automation',
+                    items: ['Python', 'Cisco Device Configuration', 'SSH', 'Network Automation']
+                }, {
+                    id: 'dfir',
+                    label: 'Forensics',
+                    title: 'Digital Forensics',
+                    items: ['FTK Imager', 'HxD', 'Autopsy', 'OSINT']
+                }, {
+                    id: 'dev',
+                    label: 'Dev & OS',
+                    title: 'OS & Programming',
+                    items: ['Linux', 'Windows Server', 'C++', 'Java', 'PHP', 'HTML', 'Arduino']
+                }, {
+                    id: 'db',
+                    label: 'Databases',
+                    title: 'Databases & Tools',
+                    items: ['MySQL', 'SQLite', 'Blynk', 'VS Code']
+                }];
+
+                var PJ = [{
+                    f: ['sec', 'net'],
+                    glyph: 'IDS',
+                    type: 'Final Year Project · Expected Jan 2027',
+                    live: true,
+                    title: 'MQTT-BIDS: An Agentless Broker-Level Intrusion Detection System',
+                    sum: 'A broker-level IDS for MQTT networks using Snort 3 signature rules.',
+                    pts: ['Developing a broker-level IDS for MQTT networks using Snort 3 signature rules within a GNS3 environment.', 'Configured real-time observability using SQLite and Grafana dashboards to monitor broker flooding DoS attacks, malformed packets and unauthorized topic access.'],
+                    tags: ['Snort 3', 'GNS3', 'Python', 'SQLite', 'Grafana']
+                }, {
+                    f: ['net', 'auto'],
+                    glyph: 'OSPF',
+                    type: 'WAN Technologies Project · 2026',
+                    live: false,
+                    title: 'Network Automation of a Multi-Area OSPF, VLAN and DHCP Network',
+                    sum: 'A GNS3 enterprise topology configured automatically using Python.',
+                    pts: ['Designed a GNS3 enterprise topology with three routers, a backbone switch and three VLANs.', 'Automated Multi-Area OSPFv2, VLAN and DHCP configuration using Python and Netmiko over SSH.'],
+                    tags: ['OSPFv2', 'Python', 'SSH', 'VLANs', 'DHCP']
+                }, {
+                    f: ['iot', 'net'],
+                    glyph: 'IoT',
+                    type: 'IoT Project · 2026',
+                    live: false,
+                    title: 'IoT Smart Home Automation System',
+                    sum: 'An Arduino-based smart home prototype with sensor integration.',
+                    pts: ['Designed an IoT-based smart home prototype utilizing an Arduino board and ESP8266 controller.', 'Integrated multiple sensors to monitor environmental conditions and trigger automated responses displayed on a real-time Blynk dashboard.'],
+                    tags: ['Arduino', 'ESP8266', 'Blynk', 'Sensors']
+                }];
+
+                /* skills topology */
+                var cv = $('#topo'), cx = cv.getContext('2d'), W = 0, H = 0, sel = 'net', nodes = [], packets = [];
+                var tabs = $('#sk-tabs');
+                SK.forEach(function(s) {
+                    var b = document.createElement('button');
+                    b.type = 'button'; b.textContent = s.label; b.id = 'sk-' + s.id;
+                    b.addEventListener('click', function() { pick(s.id) });
+                    tabs.appendChild(b)
+                });
+                function pick(id) {
+                    sel = id;
+                    var s = SK.find(function(x) { return x.id === id }), i = SK.indexOf(s);
+                    $('#sk-if').textContent = 'Gi0/' + (i + 1) + ' · up · ' + s.items.length + ' skills';
+                    $('#sk-title').textContent = s.title;
+                    var c = $('#sk-chips'); c.innerHTML = '';
+                    s.items.forEach(function(t) {
+                        var e = document.createElement('span');
+                        e.className = 'chip'; e.textContent = t; c.appendChild(e)
+                    });
+                    SK.forEach(function(x) { $('#sk-' + x.id).setAttribute('aria-pressed', x.id === id ? 'true' : 'false') });
+                    for (var k = 0; k < 4; k++) packets.push({ to: id, t: -k * .18, dir: 1 });
+                    if (reduce) drawTopo()
+                }
+                function layout() {
+                    var r = cv.getBoundingClientRect(), d = devicePixelRatio || 1;
+                    W = r.width; H = r.height;
+                    cv.width = W * d; cv.height = H * d;
+                    cx.setTransform(d, 0, 0, d, 0, 0);
+                    var R = Math.min(W * .4, H * .36);
+                    nodes = SK.map(function(s, i) {
+                        var a = -Math.PI / 2 + i * 2 * Math.PI / SK.length;
+                        return { id: s.id, label: s.label, x: W / 2 + Math.cos(a) * R * 1.12, y: H / 2 + Math.sin(a) * R }
+                    })
+                }
+                function drawTopo() {
+                    cx.clearRect(0, 0, W, H);
+                    var ox = W / 2, oy = H / 2;
+                    nodes.forEach(function(n) {
+                        var on = n.id === sel;
+                        cx.beginPath(); cx.moveTo(ox, oy); cx.lineTo(n.x, n.y);
+                        cx.strokeStyle = on ? C['--accent'] : C['--line'];
+                        cx.lineWidth = on ? 2.5 : 1.5;
+                        cx.setLineDash(on ? [] : [5, 6]); cx.stroke()
+                    });
+                    cx.setLineDash([]);
+                    packets.forEach(function(p) {
+                        if (p.t < 0) return;
+                        var n = nodes.find(function(x) { return x.id === p.to });
+                        var t = p.dir > 0 ? p.t : 1 - p.t;
+                        cx.beginPath(); cx.arc(ox + (n.x - ox) * t, oy + (n.y - oy) * t, 3.2, 0, 7);
+                        cx.fillStyle = p.dir > 0 ? C['--accent'] : C['--accent-2']; cx.fill()
+                    });
+                    nodes.forEach(function(n) {
+                        var on = n.id === sel;
+                        cx.beginPath(); cx.arc(n.x, n.y, on ? 26 : 21, 0, 7);
+                        cx.fillStyle = on ? C['--accent'] : C['--surface']; cx.fill();
+                        cx.lineWidth = 2; cx.strokeStyle = on ? C['--accent'] : C['--line']; cx.stroke();
+                        cx.fillStyle = on ? '#fff' : C['--muted'];
+                        for (var k = -1; k <= 1; k++) cx.fillRect(n.x - 9, n.y - 1 + k * 5, 18, 2);
+                        cx.font = '700 12.5px Manrope, sans-serif'; cx.textAlign = 'center';
+                        cx.fillStyle = on ? C['--ink'] : C['--muted'];
+                        cx.fillText(n.label, n.x, n.y + (n.y < oy - 5 ? -34 : 44))
+                    });
+                    cx.beginPath(); cx.arc(ox, oy, 40, 0, 7); cx.fillStyle = C['--ink']; cx.fill();
+                    cx.font = '700 13px Sora, sans-serif'; cx.fillStyle = C['--bg']; cx.textAlign = 'center';
+                    cx.fillText('AMIRUL', ox, oy + 1);
+                    cx.font = '500 10px "JetBrains Mono", monospace'; cx.fillText('core-R1', ox, oy + 15)
+                }
+                function topoLoop() {
+                    if (Math.random() < .06) packets.push({ to: SK[Math.floor(Math.random() * SK.length)].id, t: 0, dir: Math.random() < .5 ? 1 : -1 });
+                    packets.forEach(function(p) { p.t += .013 });
+                    packets = packets.filter(function(p) { return p.t < 1 });
+                    drawTopo();
+                    requestAnimationFrame(topoLoop)
+                }
+                cv.addEventListener('click', function(e) {
+                    var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+                    nodes.forEach(function(n) { if (Math.hypot(n.x - x, n.y - y) < 34) pick(n.id) })
+                });
+                addEventListener('resize', function() { layout(); drawTopo() });
+                layout(); pick('net'); drawTopo();
+                if (document.fonts) document.fonts.ready.then(drawTopo);
+                if (!reduce) topoLoop();
+
+                /* projects UI */
+                var grid = $('#pgrid');
+                PJ.forEach(function(p, i) {
+                    var b = document.createElement('button');
+                    b.type = 'button'; b.className = 'card proj'; b.dataset.f = p.f.join(' ');
+                    b.innerHTML = '<span class="glyph">' + p.glyph + '</span><div class="top"><span class="type">' + p.type + '</span><span class="badge ' + (p.live ? 'live' : 'done') + '">' + (p.live ? 'In progress' : 'Completed') + '</span></div><h3></h3><p></p><div class="chips"></div><span class="more">View details →</span>';
+                    b.querySelector('h3').textContent = p.title; b.querySelector('p').textContent = p.sum;
+                    var ch = b.querySelector('.chips');
+                    p.tags.slice(0, 4).forEach(function(t) {
+                        var s = document.createElement('span'); s.className = 'chip'; s.textContent = t; ch.appendChild(s)
+                    });
+                    b.addEventListener('click', function() { openProj(i) });
+                    grid.appendChild(b)
+                });
+                document.querySelectorAll('#filters button').forEach(function(b) {
+                    b.addEventListener('click', function() {
+                        var f = b.dataset.f;
+                        document.querySelectorAll('#filters button').forEach(function(x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') });
+                        grid.querySelectorAll('.proj').forEach(function(c) { c.hidden = !(f === 'all' || c.dataset.f.split(' ').indexOf(f) > -1) })
+                    })
+                });
+
+                /* Modals / Overlays */
+                var lastFocus = null;
+                function openOverlay(o) { lastFocus = document.activeElement; o.classList.add('open') }
+                function closeOverlays() {
+                    document.querySelectorAll('.overlay.open').forEach(function(o) { o.classList.remove('open') });
+                    if (lastFocus) lastFocus.focus()
+                }
+                function openProj(i) {
+                    var p = PJ[i];
+                    $('#m-type').textContent = p.type; $('#m-title').textContent = p.title;
+                    var l = $('#m-list'); l.innerHTML = '';
+                    p.pts.forEach(function(t) { var li = document.createElement('li'); li.textContent = t; l.appendChild(li) });
+                    var c = $('#m-chips'); c.innerHTML = '';
+                    p.tags.forEach(function(t) { var s = document.createElement('span'); s.className = 'chip'; s.textContent = t; c.appendChild(s) });
+                    openOverlay($('#projOverlay'));
+                    $('#projOverlay [data-close]').focus()
+                }
+                document.querySelectorAll('.overlay').forEach(function(o) {
+                    o.addEventListener('click', function(e) { if (e.target === o || e.target.hasAttribute('data-close')) closeOverlays() })
+                });
+
+                /* journey tabs */
+                var jt = [].slice.call(document.querySelectorAll('.jtabs [role=tab]'));
+                jt.forEach(function(t) {
+                    t.addEventListener('click', function() {
+                        jt.forEach(function(x) {
+                            var on = x === t; x.setAttribute('aria-selected', on ? 'true' : 'false');
+                            document.getElementById(x.getAttribute('aria-controls')).hidden = !on
+                        })
+                    })
+                });
+                function showTab(id) { var t = document.getElementById(id); if (t) t.click() }
+
+                /* terminal */
+                var out = $('#out');
+                function print(html) { out.insertAdjacentHTML('beforeend', html + '\n'); out.scrollTop = out.scrollHeight }
+                function esc(s) { return s.replace(/[&<>]/g, function(c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c] }) }
+                var CMDS = {
+                    help: function() {
+                        return '<span class="y">Available commands</span>\n  <span class="c">whoami</span>        who I am\n  <span class="c">availability</span>  internship dates\n  <span class="c">skills</span>        my skill areas\n  <span class="c">projects</span>      what I have built\n  <span class="c">experience</span>    work history\n  <span class="c">education</span>     where I study\n  <span class="c">ping amirul</span>   check if I am reachable\n  <span class="c">show ip route</span> where my career is heading\n  <span class="c">contact</span>       how to reach me\n  <span class="c">theme</span>         toggle light/dark\n  <span class="c">clear</span>         clear the screen'
+                    },
+                    whoami: function() {
+                        return 'Amirul Husaini Bin Abdul Manaf\nFinal-year B.Sc. (Hons.) Computer Networks · UiTM Kampus Jasin\nCGPA 3.88 · Kuala Nerus, Terengganu'
+                    },
+                    availability: function() {
+                        var d = Math.max(0, Math.ceil((start - new Date()) / 864e5));
+                        return 'Industrial training: <span class="y">15 Mar 2027 → 18 Jun 2027</span>\nStarts in ' + d + ' days\nStatus: <span class="p">OPEN FOR OFFERS</span>'
+                    },
+                    skills: function() {
+                        return SK.map(function(s) {
+                            return '<span class="c">' + s.title.padEnd(32) + '</span>' + s.items.slice(0, 5).join(', ') + (s.items.length > 5 ? ' …' : '')
+                        }).join('\n')
+                    },
+                    projects: function() {
+                        return PJ.map(function(p, i) {
+                            return '<span class="y">[' + (i + 1) + ']</span> ' + esc(p.title) + '\n    ' + esc(p.type)
+                        }).join('\n') + '\n<span class="d">tip: scroll to Projects and click a card for details</span>'
+                    },
+                    experience: function() {
+                        return 'Sep 2024–Feb 2025 IT Support Technician (Internship) · Alpha Tech Computer\nAug 2026–Sep 2026 Production Runner · NR Café Pata'
+                    },
+                    education: function() {
+                        return 'B.Sc. (Hons.) Computer Networks · UiTM Jasin · CGPA 3.88 (2025–now)\nDiploma in Computer Science · UiTM Kuala Terengganu\nSPM Pure Science · MRSM Pengkalan Chepa (5A)'
+                    },
+                    contact: function() {
+                        return 'email     amirulhusaini.am@gmail.com\nlinkedin  linkedin.com/in/amirulhusaini\n<span class="d">tip: use the Copy button in the Contact section</span>'
+                    },
+                    'ping amirul': function() {
+                        var l = 'PING amirul (uitm-jasin) 56(84) bytes of data.\n';
+                        for (var i = 1; i <= 4; i++)
+                            l += '64 bytes from amirul: icmp_seq=' + i + ' ttl=64 time=' + (8 + Math.random() * 6).toFixed(1) + ' ms\n';
+                        return l + '<span class="p">--- 4 packets transmitted, 4 received, 0% packet loss ---\nAmirul is reachable and ready to learn.</span>'
+                    },
+                    'show ip route': function() {
+                        return 'Codes: C - connected, O - OSPF, S* - next hop\n\n<span class="c">C</span>   UiTM Computer Networks       is directly connected\n<span class="c">O</span>   Network Security & IDS       via Snort 3/Python\n<span class="c">O</span>   Network Automation           via Python/SSH\n<span class="y">S*</span>   0.0.0.0/0 [your company]     via Internship, 15 Mar 2027'
+                    },
+                    theme: function() { $('#themeBtn').click(); return 'Theme switched.' },
+                    sudo: function() { return '<span class="y">Nice try.</span> Access requires an internship offer first. 😉' }
+                };
+                CMDS.ls = CMDS.help; CMDS['?'] = CMDS.help;
+                function run(raw) {
+                    var c = raw.trim().toLowerCase().replace(/\s+/g, ' ');
+                    print('<span class="p">amirul@uitm:~$</span> ' + esc(raw));
+                    if (!c) return;
+                    if (c === 'clear') { out.innerHTML = ''; return }
+                    if (c.indexOf('sudo') === 0) c = 'sudo';
+                    var f = CMDS[c];
+                    print(f ? f() : '<span class="d">command not found: ' + esc(c) + '. Type </span><span class="c">help</span>')
+                }
+                $('#termForm').addEventListener('submit', function(e) {
+                    e.preventDefault(); var i = $('#cmd'); run(i.value); i.value = ''
+                });
+                ['whoami', 'availability', 'projects', 'ping amirul', 'show ip route', 'help'].forEach(function(c) {
+                    var b = document.createElement('button'); b.type = 'button'; b.textContent = c;
+                    b.addEventListener('click', function() { run(c) }); $('#quick').appendChild(b)
+                });
+                print('<span class="d">Welcome to Amirul’s console. Last login: today from your browser.</span>');
+                run('whoami');
+
+                /* command palette */
+                var PAL = [
+                    { t: 'Availability', s: 'section', go: function() { location.hash = 'availability' } },
+                    { t: 'Ask my terminal', s: 'section', go: function() { location.hash = 'terminal'; setTimeout(function() { $('#cmd').focus() }, 300) } },
+                    { t: 'Skills', s: 'section', go: function() { location.hash = 'skills' } },
+                    { t: 'Projects', s: 'section', go: function() { location.hash = 'projects' } },
+                    { t: 'Experience', s: 'journey', go: function() { location.hash = 'journey'; showTab('t-exp') } },
+                    { t: 'Education', s: 'journey', go: function() { location.hash = 'journey'; showTab('t-edu') } },
+                    { t: 'Leadership', s: 'journey', go: function() { location.hash = 'journey'; showTab('t-lead') } },
+                    { t: 'Certifications', s: 'section', go: function() { location.hash = 'certs' } },
+                    { t: 'Contact', s: 'section', go: function() { location.hash = 'contact' } },
+                    { t: 'Copy email address', s: 'action', go: function() { copy('amirulhusaini.am@gmail.com') } },
+                    { t: 'Open LinkedIn', s: 'link', go: function() { location.href = 'https://www.linkedin.com/in/amirulhusaini' } },
+                    { t: 'Toggle light / dark', s: 'action', go: function() { $('#themeBtn').click() } }
+                ];
+                var pi = 0, pl = $('#palList'), pin = $('#palInput'), view = PAL;
+                function renderPal() {
+                    var q = pin.value.toLowerCase();
+                    view = PAL.filter(function(p) { return p.t.toLowerCase().indexOf(q) > -1 });
+                    pi = Math.min(pi, Math.max(0, view.length - 1));
+                    pl.innerHTML = '';
+                    view.forEach(function(p, i) {
+                        var li = document.createElement('li'), b = document.createElement('button');
+                        b.type = 'button'; b.setAttribute('aria-selected', i === pi ? 'true' : 'false');
+                        b.innerHTML = '<span></span><small></small>';
+                        b.firstChild.textContent = p.t; b.lastChild.textContent = p.s;
+                        b.addEventListener('click', function() { closeOverlays(); p.go() });
+                        li.appendChild(b); pl.appendChild(li)
+                    });
+                    if (!view.length) pl.innerHTML = '<li style="padding:12px;color:var(--muted)">No matches</li>'
+                }
+                function openPal() { openOverlay($('#palOverlay')); pin.value = ''; pi = 0; renderPal(); pin.focus() }
+                $('#openPalette').addEventListener('click', openPal);
+                pin.addEventListener('input', function() { pi = 0; renderPal() });
+                pin.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowDown') { pi = Math.min(view.length - 1, pi + 1); renderPal(); e.preventDefault() }
+                    else if (e.key === 'ArrowUp') { pi = Math.max(0, pi - 1); renderPal(); e.preventDefault() }
+                    else if (e.key === 'Enter' && view[pi]) { closeOverlays(); view[pi].go() }
+                });
+                addEventListener('keydown', function(e) {
+                    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openPal() }
+                    else if (e.key === 'Escape') closeOverlays()
+                });
+            })();
+        </script>
+    </body>
+</html>
