@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amirul Husaini | Portfolio</title>
+    <meta name="description" content="Portfolio of Amirul Husaini Bin Abdul Manaf — B.Sc. (Hons.) Computer Networks student specializing in Network Security, IDS (Snort 3), and Network Automation.">
+    <title>Amirul Husaini | Network & Cybersecurity Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* CSS Variables for Light/Dark Mode */
         :root[data-theme="dark"] {
+            --bg-base: #050b14;
             --surface: #0f172a;
             --surface-hover: #1e293b;
             --text-main: #f8fafc;
@@ -15,11 +17,12 @@
             --accent: #00f0ff;
             --accent-glow: rgba(0, 240, 255, 0.4);
             --border: #1e3a5f;
-            --nav-bg: rgba(5, 11, 20, 0.85); 
+            --nav-bg: rgba(5, 11, 20, 0.85);
             --matte-overlay: rgba(5, 11, 20, 0.80); /* Dims the background animation */
         }
 
         :root[data-theme="light"] {
+            --bg-base: #f8fafc;
             --surface: #ffffff;
             --surface-hover: #f1f5f9;
             --text-main: #0f172a;
@@ -32,32 +35,38 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
         body {
-            background: transparent; 
+            background-color: var(--bg-base);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            transition: color 0.3s;
+            transition: color 0.3s, background-color 0.3s;
             overflow-x: hidden;
         }
 
         /* Vanta.js Background Container */
         #vanta-bg {
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
+            background-color: var(--bg-base);
             z-index: -2;
         }
 
         /* Matte Overlay to soften the background */
         .matte-overlay {
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
             background: var(--matte-overlay);
             z-index: -1;
@@ -68,7 +77,8 @@
         /* Navigation */
         nav {
             position: fixed;
-            top: 0; width: 100%;
+            top: 0;
+            width: 100%;
             background: var(--nav-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
@@ -79,12 +89,12 @@
             padding: 15px 40px;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            transition: background 0.3s;
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
         .nav-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover, .nav-links a:focus { color: var(--accent); }
 
         .theme-toggle {
             background: transparent;
@@ -95,6 +105,7 @@
             cursor: pointer;
             font-family: 'Fira Code', monospace;
             transition: all 0.2s;
+            white-space: nowrap;
         }
         .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -104,12 +115,12 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 40px 0 60px;
+            padding: 40px 0 50px;
         }
 
         .profile-img {
-            width: 250px;
-            height: 250px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
             border: 4px solid var(--accent);
             box-shadow: 0 0 30px var(--accent-glow);
@@ -118,11 +129,39 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
-        .hero h2 { font-size: 1.2rem; color: var(--accent); font-weight: 500; margin-bottom: 20px; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 10px; }
+        .hero h2 { font-size: 1.2rem; color: var(--accent); font-weight: 500; margin-bottom: 20px; font-family: 'Fira Code', monospace; }
         .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto 20px; font-size: 1.1rem; }
-        .hero .contact-info { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 30px; }
-        .hero a { color: var(--accent); text-decoration: none; margin: 0 10px; }
+        .hero .contact-info { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; }
+        .hero .contact-info a { color: var(--accent); text-decoration: none; margin: 0 6px; }
+        .hero .contact-info a:hover { text-decoration: underline; }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: var(--surface);
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: var(--accent);
+            color: #050b14;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
 
         /* Internship Banner */
         .internship-banner {
@@ -161,38 +200,47 @@
             perspective: 1000px;
             margin-bottom: 20px;
             cursor: pointer;
+            outline: none;
         }
         .card-inner {
             position: relative;
             width: 100%;
-            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            min-height: 0;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1), min-height 0.4s ease;
             transform-style: preserve-3d;
         }
         .card-container.is-flipped .card-inner {
             transform: rotateY(180deg);
+            min-height: 280px;
         }
         .card-front {
-            position: relative; 
+            position: relative;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 25px;
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             transition: border-color 0.2s, transform 0.2s;
         }
-        .card-container:hover .card-front {
+        .card-container:hover .card-front,
+        .card-container:focus-visible .card-front {
             border-color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .card-back {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050b14;
             border: 1px solid var(--accent);
             border-radius: 8px;
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             transform: rotateY(180deg);
             overflow: hidden;
             display: flex;
@@ -203,7 +251,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.85;
+            opacity: 0.9;
             transition: opacity 0.3s;
         }
         .card-container:hover .card-back img {
@@ -211,9 +259,11 @@
         }
         .card-caption {
             position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(5, 11, 20, 0.88);
+            color: #f8fafc;
             padding: 12px;
             text-align: center;
             font-family: 'Fira Code', monospace;
@@ -224,15 +274,17 @@
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
         .card-title { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
         .card-subtitle { color: var(--accent); font-family: 'Fira Code', monospace; font-size: 0.9rem; }
-        .card-date { color: var(--text-muted); font-size: 0.9rem; white-space: nowrap; }
+        .card-date { color: var(--text-muted); font-size: 0.9rem; white-space: nowrap; font-family: 'Fira Code', monospace; }
         .card-front ul { margin-left: 20px; color: var(--text-muted); margin-bottom: 15px; }
         .card-front li { margin-bottom: 8px; }
+        .card-front a { color: var(--accent); text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+        .card-front a:hover { text-decoration: underline; }
 
         .flip-hint {
             font-family: 'Fira Code', monospace;
             font-size: 0.8rem;
             color: var(--accent);
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             align-items: center;
             opacity: 0.8;
@@ -240,15 +292,48 @@
         .flip-hint::before { content: '↻'; margin-right: 6px; font-size: 1.1rem; }
 
         /* Skills Grid */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .skill-box { background: var(--surface); border: 1px solid var(--border); padding: 15px; border-radius: 6px; }
-        .skill-box strong { display: block; color: var(--accent); margin-bottom: 5px; font-family: 'Fira Code', monospace; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .skill-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 6px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .skill-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .skill-box strong { display: block; color: var(--accent); margin-bottom: 6px; font-family: 'Fira Code', monospace; }
         .skill-box span { font-size: 0.9rem; color: var(--text-muted); }
 
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            margin-top: 60px;
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; text-align: center; }
-            .nav-links { justify-content: center; }
-            .hero { padding: 60px 0 40px; }
+            html { scroll-padding-top: 130px; }
+            nav { flex-direction: column; gap: 12px; text-align: center; padding: 12px 20px; }
+            .nav-links { justify-content: center; gap: 14px; }
+            .container { margin-top: 130px; }
+            .hero { padding: 30px 0 40px; }
+            .hero h1 { font-size: 2.1rem; }
         }
     </style>
 </head>
@@ -266,22 +351,28 @@
             <a href="#projects">Projects</a>
             <a href="#experience">Experience</a>
             <a href="#education">Education</a>
+            <a href="#leadership">Leadership</a>
         </div>
-        <button class="theme-toggle" id="themeBtn">Toggle Theme</button>
+        <button class="theme-toggle" id="themeBtn" aria-label="Toggle Light/Dark Theme">☀️ Light Mode</button>
     </nav>
 
     <div class="container">
-        
+
         <!-- Hero / Executive Summary -->
         <div class="hero" id="summary">
-            <img src="mio.jpg" alt="Amirul Husaini" class="profile-img">
+            <img src="images/mio.jpg" alt="Amirul Husaini" class="profile-img">
             <h1>Amirul Husaini Bin Abdul Manaf</h1>
             <h2>B.Sc. (Hons.) Computer Networks</h2>
             <p>Final-year Computer Networks student at UiTM Jasin with hands-on experience in network security, virtualization and wireless network simulation. Skilled in developing intrusion detection systems and configuring enterprise network topologies using Snort 3, GNS3, and Python.</p>
-            
+
             <div class="contact-info">
-                Kuala Nerus, Terengganu | 013-788 2685 | <a href="mailto:amirulhusaini.am@gmail.com">amirulhusaini.am@gmail.com</a><br>
-                <a href="https://github.com/Myrunn" target="_blank">github.com/Myrunn</a> | <a href="https://www.linkedin.com/in/amirulhusaini" target="_blank">linkedin.com/in/amirulhusaini</a>
+                Kuala Nerus, Terengganu | <a href="tel:+60137882685">013-788 2685</a> | <a href="mailto:amirulhusaini.am@gmail.com">amirulhusaini.am@gmail.com</a>
+            </div>
+
+            <div class="hero-actions">
+                <a href="mailto:amirulhusaini.am@gmail.com" class="btn">✉️ Contact Me</a>
+                <a href="https://github.com/Myrunn" target="_blank" rel="noopener noreferrer" class="btn">💻 GitHub</a>
+                <a href="https://www.linkedin.com/in/amirulhusaini" target="_blank" rel="noopener noreferrer" class="btn">🔗 LinkedIn</a>
             </div>
         </div>
 
@@ -304,7 +395,7 @@
                 </div>
                 <div class="skill-box">
                     <strong>Configuration & Auto</strong>
-                    <span>Cisco Device Configuration, Python, SSH, Network Automation</span>
+                    <span>Cisco Device Configuration, Python, Netmiko, SSH, Network Automation</span>
                 </div>
                 <div class="skill-box">
                     <strong>Tools & Simulation</strong>
@@ -316,11 +407,11 @@
                 </div>
                 <div class="skill-box">
                     <strong>OS & Programming</strong>
-                    <span>Linux, Windows Server, Windows 10/11, Python, C++, Java, PHP, HTML, Arduino</span>
+                    <span>Linux, Windows Server, Windows 10/11, Python, C++, Java, PHP, HTML/CSS, Arduino</span>
                 </div>
                 <div class="skill-box">
                     <strong>Forensics & DBs</strong>
-                    <span>FTK Imager, HxD, Autopsy, OSINT, MySQL, SQLite, Blynk</span>
+                    <span>FTK Imager, HxD, Autopsy, OSINT, MySQL, SQLite, Grafana, Blynk</span>
                 </div>
             </div>
         </div>
@@ -328,8 +419,8 @@
         <!-- Technical Projects -->
         <div class="section" id="projects">
             <h2 class="section-title">Technical Projects</h2>
-            
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for MQTT-BIDS project">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -343,16 +434,16 @@
                             <li>Developing a broker-level IDS for MQTT networks using Snort 3 signature rules within a GNS3 environment.</li>
                             <li>Configured real-time observability using SQLite and Grafana dashboards to monitor broker flooding DoS attacks, malformed packets and unauthorized topic access.</li>
                         </ul>
-                        <div class="flip-hint">Click box to view project image</div>
+                        <div class="flip-hint">Click box to view project preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Grafana+Dashboard" alt="MQTT-BIDS">
-                        <div class="card-caption">Grafana Observability Dashboard</div>
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=MQTT-BIDS+%7C+Snort+3+%26+Grafana+IDS" alt="MQTT-BIDS Grafana Dashboard" loading="lazy">
+                        <div class="card-caption">Grafana Observability Dashboard & Snort 3 Alerts</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for Network Automation project">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -366,16 +457,16 @@
                             <li>Designed a GNS3 enterprise topology with three routers, a backbone switch and three VLANs.</li>
                             <li>Automated Multi-Area OSPFv2, VLAN and DHCP configuration using Python and Netmiko over SSH.</li>
                         </ul>
-                        <div class="flip-hint">Click box to view topology image</div>
+                        <div class="flip-hint">Click box to view topology preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=GNS3+Topology" alt="GNS3 Topology">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=GNS3+Multi-Area+OSPF+Topology" alt="GNS3 Topology" loading="lazy">
                         <div class="card-caption">GNS3 Multi-Area Enterprise Topology</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for IoT Smart Home project">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -389,10 +480,10 @@
                             <li>Designed an IoT-based smart home prototype utilizing an Arduino board and ESP8266 controller.</li>
                             <li>Integrated multiple sensors to monitor environmental conditions and trigger automated responses displayed on a real-time Blynk dashboard.</li>
                         </ul>
-                        <div class="flip-hint">Click box to view hardware image</div>
+                        <div class="flip-hint">Click box to view hardware preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Arduino+Hardware" alt="Arduino IoT">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=Arduino+%26+ESP8266+Smart+Home" alt="Arduino IoT" loading="lazy">
                         <div class="card-caption">Arduino & ESP8266 Hardware Setup</div>
                     </div>
                 </div>
@@ -402,8 +493,8 @@
         <!-- Working Experience -->
         <div class="section" id="experience">
             <h2 class="section-title">Working Experience</h2>
-            
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for Alpha Tech Computer internship">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -416,18 +507,18 @@
                         <ul>
                             <li>Installed and set up device wiring for hotel buildings in Kuala Terengganu.</li>
                             <li>Troubleshot Ethernet switch cabling issues at a client office.</li>
-                            <li>Developed a static website for the company.</li>
+                            <li>Developed a static website for the company (<a href="https://github.com/Myrunn/Alphatech_website" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">View Repository ↗</a>).</li>
                         </ul>
-                        <div class="flip-hint">Click box to view work image</div>
+                        <div class="flip-hint">Click box to view work preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=On-site+Wiring" alt="Alpha Tech Work">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=Alpha+Tech+Network+%26+Wiring+Setup" alt="Alpha Tech Work" loading="lazy">
                         <div class="card-caption">On-site server wiring and network setup</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for NR Cafe Pata experience">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -435,15 +526,15 @@
                                 <div class="card-title">Production Runner (Part-time)</div>
                                 <div class="card-subtitle">NR Café Pata</div>
                             </div>
-                            <div class="card-date">Aug. 2026 - Sep. 2026</div>
+                            <div class="card-date">Aug. 2026 – Sep. 2026</div>
                         </div>
                         <ul>
                             <li>Ensured timely service and maintained high customer satisfaction in a fast-paced environment.</li>
                         </ul>
-                        <div class="flip-hint">Click box to view image</div>
+                        <div class="flip-hint">Click box to view preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=NR+Cafe" alt="NR Cafe">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=NR+Caf%C3%A9+Pata" alt="NR Cafe" loading="lazy">
                         <div class="card-caption">Fast-paced service environment</div>
                     </div>
                 </div>
@@ -453,8 +544,8 @@
         <!-- Education Background -->
         <div class="section" id="education">
             <h2 class="section-title">Education Background</h2>
-            
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for UiTM Jasin education">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -464,16 +555,16 @@
                             </div>
                             <div class="card-date">March 2025 – Present | CGPA: 3.88</div>
                         </div>
-                        <div class="flip-hint">Click box to view campus image</div>
+                        <div class="flip-hint">Click box to view campus preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=UiTM+Jasin" alt="UiTM Jasin">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=UiTM+Kampus+Jasin%2C+Melaka" alt="UiTM Jasin" loading="lazy">
                         <div class="card-caption">UiTM Kampus Jasin, Melaka</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for UiTM Kuala Terengganu education">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -483,16 +574,16 @@
                             </div>
                             <div class="card-date">Oct. 2022 – Feb. 2025 | CGPA: 3.52</div>
                         </div>
-                        <div class="flip-hint">Click box to view campus image</div>
+                        <div class="flip-hint">Click box to view campus preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=UiTM+Kuala+Terengganu" alt="UiTM Terengganu">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=UiTM+Kampus+Kuala+Terengganu" alt="UiTM Terengganu" loading="lazy">
                         <div class="card-caption">UiTM Kampus Kuala Terengganu</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for MRSM Pengkalan Chepa education">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -502,10 +593,10 @@
                             </div>
                             <div class="card-date">2017 – 2021 | Result: 5A</div>
                         </div>
-                        <div class="flip-hint">Click box to view school image</div>
+                        <div class="flip-hint">Click box to view school preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=MRSM+Pengkalan+Chepa" alt="MRSM">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=MRSM+Pengkalan+Chepa" alt="MRSM" loading="lazy">
                         <div class="card-caption">MRSM Pengkalan Chepa</div>
                     </div>
                 </div>
@@ -515,29 +606,29 @@
         <!-- Leadership & Certifications -->
         <div class="section" id="leadership">
             <h2 class="section-title">Leadership & Certifications</h2>
-            
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for Leadership Experience">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
                             <div class="card-title">Leadership Experience</div>
                         </div>
                         <ul>
-                            <li><strong>Technical Support Committee</strong> | SULAM Programme, UiTM Kampus Jasin (Oct 2026 – Present) - Support technical works for "Project Netizen Hero!".</li>
+                            <li><strong>Technical Support Committee</strong> | SULAM Programme, UiTM Kampus Jasin (Oct 2026 – Present) — Support technical works for "Project Netizen Hero!".</li>
                             <li><strong>Admin Assistant & Technical Support</strong> | ICTFF8 Capture The Flag (Jan 2026).</li>
                             <li><strong>Vice Treasurer</strong> | Networking Society Club (Aug 2025 – Jan 2026).</li>
-                            <li><strong>Secretary</strong> | Res-Q Association Club (Jan 2023 – Jun 2023) - Led voluntary assistance for students and local community.</li>
+                            <li><strong>Secretary</strong> | Res-Q Association Club (Jan 2023 – Jun 2023) — Led voluntary assistance for students and local community.</li>
                         </ul>
-                        <div class="flip-hint">Click box to view event image</div>
+                        <div class="flip-hint">Click box to view event preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=SULAM+Event" alt="Leadership">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=SULAM+%26+CTF+Technical+Support" alt="Leadership" loading="lazy">
                         <div class="card-caption">SULAM Event Technical Support</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container" onclick="this.classList.toggle('is-flipped')">
+            <div class="card-container" tabindex="0" role="button" aria-label="Flip card for Certifications">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-header">
@@ -549,10 +640,10 @@
                             <li>Cisco Networking Academy CCNA Courses</li>
                             <li>Food Handler Training Course – Richkey Academy (Jul. 2026)</li>
                         </ul>
-                        <div class="flip-hint">Click box to view certificates</div>
+                        <div class="flip-hint">Click box to view certificates preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://via.placeholder.com/800x400/0f172a/00f0ff?text=Certificates" alt="Certifications">
+                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=Google+%26+Cisco+Certifications" alt="Certifications" loading="lazy">
                         <div class="card-caption">Google & Cisco Certifications</div>
                     </div>
                 </div>
@@ -561,26 +652,46 @@
 
     </div>
 
+    <footer>
+        <p>© 2026 Amirul Husaini Bin Abdul Manaf · Built for <a href="https://github.com/Myrunn/Myrunn.github.io" target="_blank" rel="noopener noreferrer">Myrunn.github.io</a></p>
+    </footer>
+
     <!-- Scripts required for Vanta.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-    
+
     <script>
-        // Initialize Vanta.js
-        let vantaEffect = VANTA.NET({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x00f0ff,
-            backgroundColor: 0x050b14, 
-            points: 12.00,
-            maxDistance: 20.00,
-            spacing: 18.00
+        // Initialize Vanta.js safely
+        let vantaEffect = null;
+        if (window.VANTA && window.VANTA.NET) {
+            vantaEffect = VANTA.NET({
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x00f0ff,
+                backgroundColor: 0x050b14,
+                points: 12.00,
+                maxDistance: 20.00,
+                spacing: 18.00
+            });
+        }
+
+        // Flip Card Click & Keyboard Accessibility
+        document.querySelectorAll('.card-container').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('is-flipped');
+            });
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.classList.toggle('is-flipped');
+                }
+            });
         });
 
         // Theme Toggle Logic
@@ -591,18 +702,21 @@
             const currentTheme = rootAttr.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             rootAttr.setAttribute('data-theme', newTheme);
-            
+            themeBtn.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+
             // Update Vanta.js colors based on the new theme
-            if (newTheme === 'light') {
-                vantaEffect.setOptions({
-                    color: 0x0284c7, 
-                    backgroundColor: 0xf8fafc 
-                });
-            } else {
-                vantaEffect.setOptions({
-                    color: 0x00f0ff, 
-                    backgroundColor: 0x050b14 
-                });
+            if (vantaEffect) {
+                if (newTheme === 'light') {
+                    vantaEffect.setOptions({
+                        color: 0x0284c7,
+                        backgroundColor: 0xf8fafc
+                    });
+                } else {
+                    vantaEffect.setOptions({
+                        color: 0x00f0ff,
+                        backgroundColor: 0x050b14
+                    });
+                }
             }
         });
     </script>
