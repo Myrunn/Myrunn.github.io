@@ -211,7 +211,7 @@
         }
         .card-container.is-flipped .card-inner {
             transform: rotateY(180deg);
-            min-height: 280px;
+            min-height: 320px;
         }
         .card-front {
             position: relative;
@@ -251,8 +251,28 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.9;
+            object-position: center 25%;
+            opacity: 0.92;
             transition: opacity 0.3s;
+        }
+        .card-back img.contain-diagram {
+            object-fit: contain;
+            background: #ffffff;
+            padding: 10px 10px 48px;
+        }
+        .card-gallery {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            gap: 4px;
+            background: #050b14;
+        }
+        .card-gallery img {
+            flex: 1 1 0;
+            min-width: 0;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 25%;
         }
         .card-container:hover .card-back img {
             opacity: 1;
@@ -437,8 +457,8 @@
                         <div class="flip-hint">Click box to view project preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=MQTT-BIDS+%7C+Snort+3+%26+Grafana+IDS" alt="MQTT-BIDS Grafana Dashboard" loading="lazy">
-                        <div class="card-caption">Grafana Observability Dashboard & Snort 3 Alerts</div>
+                        <img class="contain-diagram" src="images/MQTT-BIDS%20try.png" alt="MQTT-BIDS GNS3 Topology" loading="lazy">
+                        <div class="card-caption">GNS3 Testbed Topology (MQTT Broker & Snort 3 IDS)</div>
                     </div>
                 </div>
             </div>
@@ -460,8 +480,8 @@
                         <div class="flip-hint">Click box to view topology preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=GNS3+Multi-Area+OSPF+Topology" alt="GNS3 Topology" loading="lazy">
-                        <div class="card-caption">GNS3 Multi-Area Enterprise Topology</div>
+                        <img src="images/FSKM%20network%20design.jpg" alt="FSKM Network Topology Design Presentation" loading="lazy">
+                        <div class="card-caption">Network Topology & Enterprise Design Presentation</div>
                     </div>
                 </div>
             </div>
@@ -483,8 +503,12 @@
                         <div class="flip-hint">Click box to view hardware preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=Arduino+%26+ESP8266+Smart+Home" alt="Arduino IoT" loading="lazy">
-                        <div class="card-caption">Arduino & ESP8266 Hardware Setup</div>
+                        <div class="card-gallery">
+                            <img src="images/IoT%20Smart%20Home.jpg" alt="IoT Smart Home Team & Prototype Presentation" loading="lazy">
+                            <img src="images/IoT%20Smart%20Home%202.jpg" alt="ICEMS Smart Home Prototype Model" loading="lazy">
+                            <img src="images/IoT%20Smart%20Home%203.jpg" alt="Arduino & Breadboard Sensor Wiring" loading="lazy">
+                        </div>
+                        <div class="card-caption">Arduino & ESP8266 Smart Home Prototype & Wiring</div>
                     </div>
                 </div>
             </div>
@@ -512,8 +536,12 @@
                         <div class="flip-hint">Click box to view work preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=Alpha+Tech+Network+%26+Wiring+Setup" alt="Alpha Tech Work" loading="lazy">
-                        <div class="card-caption">On-site server wiring and network setup</div>
+                        <div class="card-gallery">
+                            <img src="images/Alpha%20Tech%20Computer.jpg" alt="Alpha Tech Computer Sdn. Bhd. Storefront" loading="lazy">
+                            <img src="images/Alpha%20Tech%202.jpg" alt="PC Hardware Maintenance at Alpha Tech" loading="lazy">
+                            <img src="images/Alpha%20tech%203.jpg" alt="Projector & Workstation Setup at Alpha Tech" loading="lazy">
+                        </div>
+                        <div class="card-caption">Alpha Tech Computer Sdn. Bhd. — Hardware Servicing & Setup</div>
                     </div>
                 </div>
             </div>
@@ -534,8 +562,8 @@
                         <div class="flip-hint">Click box to view preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=NR+Caf%C3%A9+Pata" alt="NR Cafe" loading="lazy">
-                        <div class="card-caption">Fast-paced service environment</div>
+                        <img src="images/NR-Cafe.jpg" alt="NR Café Pata" loading="lazy">
+                        <div class="card-caption">NR Café Pata — Fast-paced service environment</div>
                     </div>
                 </div>
             </div>
@@ -558,8 +586,11 @@
                         <div class="flip-hint">Click box to view campus preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=UiTM+Kampus+Jasin%2C+Melaka" alt="UiTM Jasin" loading="lazy">
-                        <div class="card-caption">UiTM Kampus Jasin, Melaka</div>
+                        <div class="card-gallery">
+                            <img src="images/UiTM%20Jasin.jpg" alt="UiTM Kampus Jasin, Melaka" loading="lazy">
+                            <img src="images/Dean%20List%20award.jpg" alt="Dean's List Award - Computer Networks (MAD 2025)" loading="lazy">
+                        </div>
+                        <div class="card-caption">UiTM Kampus Jasin, Melaka & Dean's List Award (MAD 2025)</div>
                     </div>
                 </div>
             </div>
@@ -577,7 +608,7 @@
                         <div class="flip-hint">Click box to view campus preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=UiTM+Kampus+Kuala+Terengganu" alt="UiTM Terengganu" loading="lazy">
+                        <img src="images/UiTM%20Kuala%20Terengganu.jpg" alt="UiTM Kampus Kuala Terengganu" loading="lazy">
                         <div class="card-caption">UiTM Kampus Kuala Terengganu</div>
                     </div>
                 </div>
@@ -596,8 +627,8 @@
                         <div class="flip-hint">Click box to view school preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=MRSM+Pengkalan+Chepa" alt="MRSM" loading="lazy">
-                        <div class="card-caption">MRSM Pengkalan Chepa</div>
+                        <img src="images/MRSM%20PC.jpg" alt="MRSM Pengkalan Chepa" loading="lazy">
+                        <div class="card-caption">MRSM Pengkalan Chepa, Kelantan</div>
                     </div>
                 </div>
             </div>
@@ -622,8 +653,11 @@
                         <div class="flip-hint">Click box to view event preview</div>
                     </div>
                     <div class="card-back">
-                        <img src="https://placehold.co/800x400/0f172a/00f0ff/png?text=SULAM+%26+CTF+Technical+Support" alt="Leadership" loading="lazy">
-                        <div class="card-caption">SULAM Event Technical Support</div>
+                        <div class="card-gallery">
+                            <img src="images/ICTFF8.jpg" alt="ICTFF8 Capture The Flag Technical Support" loading="lazy">
+                            <img src="images/ICTFF8-2.jpg" alt="ICTFF8 Capture The Flag Crew" loading="lazy">
+                        </div>
+                        <div class="card-caption">ICTFF8 Capture The Flag — Technical Support & Crew</div>
                     </div>
                 </div>
             </div>
